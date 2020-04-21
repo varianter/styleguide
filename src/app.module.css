@@ -1,0 +1,53 @@
+@import "./colors.css";
+
+.container {
+  min-height: 100%;
+
+  --bg-opacity: 1;
+
+  max-width: 50rem;
+  margin-left: 20%;
+}
+.container::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  content: "";
+  display: block;
+  background: var(--color-secondary4--default);
+  z-index: -1;
+  opacity: var(--bg-opacity);
+  transition: opacity 100ms ease-in;
+}
+@media (max-width: 1000px) {
+  .container {
+    margin-left: 0;
+  }
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.section {
+  margin: 40vh 0;
+  padding: 0 2rem;
+}
+
+.logoSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 4fr));
+  grid-auto-rows: 1fr;
+  column-gap: 5rem;
+  row-gap: 1rem;
+  align-items: stretch;
+}
+.logoSection > img {
+  display: block;
+  max-width: 100%;
+}

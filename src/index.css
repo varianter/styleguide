@@ -1,0 +1,22 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+}
+
+@import "./typography.css";
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+#root {
+  position: relative;
+}

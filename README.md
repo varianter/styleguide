@@ -1,3 +1,3 @@
-# Variant Style Guide
+# Variant Styleguide
 
 Initial style guide for Variant. Always work in progress.
