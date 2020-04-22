@@ -55,8 +55,6 @@ const Swatch: React.FC<{
     onClick(undefined)
   );
 
-  console.log(set.default.text);
-
   return (
     <div
       className={className}
