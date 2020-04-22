@@ -2,6 +2,7 @@ import * as React from "react";
 import * as blobs2 from "blobs/v2";
 import { useState, useEffect } from "react";
 import { Color, colorPairs } from "../color-grid/colors";
+import css from "./blobs.module.css";
 
 const Group: React.FC<{
   name: string;
@@ -127,8 +128,10 @@ const BlobGenerator: React.FC<{}> = () => {
 
       <div dangerouslySetInnerHTML={{ __html: svgString }}></div>
 
-      <DownloadLink svg={svgString} size={size} type="svg" />
-      <DownloadLink svg={svgString} size={size} type="png" />
+      <p className={css.downloadLinks}>
+        <DownloadLink svg={svgString} size={size} type="svg" />
+        <DownloadLink svg={svgString} size={size} type="png" />
+      </p>
     </div>
   );
 };
