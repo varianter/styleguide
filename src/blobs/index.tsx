@@ -17,19 +17,48 @@ const Group: React.FC<{
 
 const DownloadLink: React.FC<{
   svg: string;
+  size: number;
   type?: "svg" | "png";
-}> = ({ svg, type = "svg" }) => {
+}> = ({ svg, size, type = "svg" }) => {
+  const blobPngUrl = usePngBlobUrl(svg, size);
+  const url =
+    type === "svg" ? `data:image/svg+xml;base64,\n${btoa(svg)}` : blobPngUrl;
+
   return (
-    <a
-      href-lang="image/svg+xml"
-      href={`data:image/svg+xml;base64,\n${btoa(svg)}`}
-      title="variant-blob.svg"
-      download="variant-blob.svg"
-    >
-      Download
+    <a href={url} download={`variant-blob.${type}`}>
+      Download {type}
     </a>
   );
 };
+
+function usePngBlobUrl(svgString: string, size: number) {
+  const [blobUrl, setBlobUrl] = useState<string | undefined>();
+
+  useEffect(
+    function () {
+      var canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.height = size;
+      var ctx = canvas.getContext("2d");
+      var img = new Image();
+
+      var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+      var url = URL.createObjectURL(svg);
+
+      img.onload = function () {
+        ctx?.drawImage(img, 0, 0);
+        var png = canvas.toDataURL("image/png");
+        URL.revokeObjectURL(png);
+
+        setBlobUrl(canvas.toDataURL("image/png"));
+      };
+      img.src = url;
+    },
+    [svgString, size]
+  );
+
+  return blobUrl;
+}
 
 const Input: React.FC<{
   val: number;
@@ -98,7 +127,8 @@ const BlobGenerator: React.FC<{}> = () => {
 
       <div dangerouslySetInnerHTML={{ __html: svgString }}></div>
 
-      <DownloadLink svg={svgString} />
+      <DownloadLink svg={svgString} size={size} type="svg" />
+      <DownloadLink svg={svgString} size={size} type="png" />
     </div>
   );
 };
