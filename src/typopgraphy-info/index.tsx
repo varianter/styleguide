@@ -51,11 +51,11 @@ export default function TypographyInfo() {
       </Metadata>
 
       <Metadata size={20} name="Paragraph" lineHeight="1.6">
-        <p className="lead">En ny variant av et konsulentselskap</p>
+        <p>En ny variant av et konsulentselskap</p>
       </Metadata>
 
       <Metadata size={13} name="Caption" lineHeight="1.4">
-        <p className="lead">En ny variant av et konsulentselskap</p>
+        <p className="caption">En ny variant av et konsulentselskap</p>
       </Metadata>
     </div>
   );
