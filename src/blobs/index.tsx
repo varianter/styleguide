@@ -81,9 +81,9 @@ const Input: React.FC<{
 };
 
 const BlobGenerator: React.FC<{}> = () => {
-  const [points, setPoints] = useState<number>(4);
+  const [points, setPoints] = useState<number>(2);
   const [size, setSize] = useState<number>(250);
-  const [randomness, setRandomness] = useState<number>(10);
+  const [randomness, setRandomness] = useState<number>(9);
   const [fill, setFill] = useState<Color>(colorPairs.primary.default.bg);
   const [seed, setSeed] = useState(Math.random());
 
@@ -105,12 +105,17 @@ const BlobGenerator: React.FC<{}> = () => {
   return (
     <div>
       <Group name="Points">
-        <Input min={3} max={15} onInput={setPoints} val={points} />
+        <Input
+          min={3}
+          max={15}
+          onInput={(i) => setPoints(i - 3)}
+          val={points + 3}
+        />
       </Group>
       <Group name="size">
         <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
       </Group>
-      <Group name="Randomness">
+      <Group name="Point spread">
         <Input min={1} max={20} onInput={setRandomness} val={randomness} />
       </Group>
 
