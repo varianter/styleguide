@@ -24,7 +24,7 @@ const Series: React.FC<{
           className={css.colorPair}
           style={{ backgroundColor: pair.bg, color: pair.text }}
         >
-          <div>{pair.bg}</div>
+          <CopyableText>{pair.bg}</CopyableText>
         </div>
       ))}
     </div>
@@ -85,7 +85,7 @@ const Swatch: React.FC<{
             </span>
           </button>
         )}
-        <div>{set.default.bg}</div>
+        <CopyableText>{set.default.bg}</CopyableText>
       </div>
       {set.shade && (
         <Series
@@ -98,6 +98,26 @@ const Swatch: React.FC<{
   );
 };
 
+const CopyableText: React.FC<{ children: string }> = ({ children }) => {
+  const [icon, setIcon] = useState<string>("");
+
+  const onClick = async () => {
+    try {
+      navigator.clipboard.writeText(children);
+      setIcon("👍");
+      setTimeout(function () {
+        setIcon("");
+      }, 3000);
+    } catch (_) {}
+  };
+
+  return (
+    <div onClick={onClick}>
+      {children}
+      {icon}
+    </div>
+  );
+};
 const ColorMatch: React.FC<{ first: Color; second: Color }> = ({
   first,
   second,
