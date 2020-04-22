@@ -34,7 +34,7 @@ export const standardPairs: ColorScheme = [
   },
 ];
 
-export const colorPairs: { [name: string]: ColorSet } = {
+export const colorPairs = {
   primary: {
     default: {
       bg: "#E61A6B",

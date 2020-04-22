@@ -1,0 +1,106 @@
+import * as React from "react";
+import * as blobs2 from "blobs/v2";
+import { useState, useEffect } from "react";
+import { Color, colorPairs } from "../color-grid/colors";
+
+const Group: React.FC<{
+  name: string;
+}> = ({ name, children }) => {
+  return (
+    <div>
+      <h4>{name}</h4>
+
+      {children}
+    </div>
+  );
+};
+
+const DownloadLink: React.FC<{
+  svg: string;
+  type?: "svg" | "png";
+}> = ({ svg, type = "svg" }) => {
+  return (
+    <a
+      href-lang="image/svg+xml"
+      href={`data:image/svg+xml;base64,\n${btoa(svg)}`}
+      title="variant-blob.svg"
+      download="variant-blob.svg"
+    >
+      Download
+    </a>
+  );
+};
+
+const Input: React.FC<{
+  val: number;
+  onInput: (val: number) => void;
+  min: number;
+  max: number;
+  step?: number;
+}> = ({ onInput, min, max, val, step = 1 }) => {
+  return (
+    <input
+      type="range"
+      min={min}
+      max={max}
+      step={step}
+      value={val}
+      onInput={(e) => onInput(Number(e.currentTarget.value))}
+    />
+  );
+};
+
+const BlobGenerator: React.FC<{}> = () => {
+  const [points, setPoints] = useState<number>(4);
+  const [size, setSize] = useState<number>(250);
+  const [randomness, setRandomness] = useState<number>(10);
+  const [fill, setFill] = useState<Color>(colorPairs.primary.default.bg);
+  const [seed, setSeed] = useState(Math.random());
+
+  const random = () => setSeed(Math.random());
+  useEffect(random, [points, randomness]);
+
+  const svgString = blobs2.svg(
+    {
+      seed,
+      extraPoints: points,
+      randomness,
+      size,
+    },
+    {
+      fill,
+    }
+  );
+
+  return (
+    <div>
+      <Group name="Points">
+        <Input min={3} max={15} onInput={setPoints} val={points} />
+      </Group>
+      <Group name="size">
+        <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
+      </Group>
+      <Group name="Randomness">
+        <Input min={1} max={20} onInput={setRandomness} val={randomness} />
+      </Group>
+
+      <Group name="Fill color">
+        <input
+          type="color"
+          onInput={(e) => setFill(e.currentTarget.value)}
+          value={fill}
+        />
+      </Group>
+
+      <button onClick={random} type="button">
+        Random
+      </button>
+
+      <div dangerouslySetInnerHTML={{ __html: svgString }}></div>
+
+      <DownloadLink svg={svgString} />
+    </div>
+  );
+};
+
+export default BlobGenerator;

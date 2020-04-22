@@ -2172,6 +2172,11 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
+blobs@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/blobs/-/blobs-2.0.1.tgz#da55c0f02bec077ea89161c4da4b8c98d091d8e7"
+  integrity sha512-B0Zxi54/RM8UDg0LJ9TPQSE4RYxFf+QYMUFthf3IPJ50G7GjZ5yWHPVvZf3B4f94rvoyV3nW3Hy89VsmBpmGeg==
+
 bluebird@^3.5.5:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"

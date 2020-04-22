@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import ColorSection from "./color-grid";
 import css from "./app.module.css";
 import TypographyInfo from "./typopgraphy-info";
+import BlobGenerator from "./blobs";
 
 function App() {
   const [val, ref] = usePercentageInView<HTMLDivElement>();
@@ -35,6 +36,12 @@ function App() {
         <h2>Colors</h2>
 
         <ColorSection />
+      </div>
+
+      <div className={css.section}>
+        <h2>Blobs</h2>
+
+        <BlobGenerator />
       </div>
     </div>
   );
