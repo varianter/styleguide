@@ -85,13 +85,31 @@
 
 @import "./colors.css";
 
-body {
+html {
   font-size: 20px;
+}
+@media (max-width: 1000px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (max-width: 800px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+}
+body {
   font-family: "Graphik Web", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-standardBlack);
 }
+
 h1,
 h2,
 h3,
