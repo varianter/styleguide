@@ -7,6 +7,7 @@ import colorScheme, {
 } from "./colors";
 import css from "./color-grid.module.css";
 import { useState, useEffect } from "react";
+import CopyableText from "../components/copyable-text";
 
 const Series: React.FC<{
   series: ColorSeries;
@@ -98,26 +99,6 @@ const Swatch: React.FC<{
   );
 };
 
-const CopyableText: React.FC<{ children: string }> = ({ children }) => {
-  const [icon, setIcon] = useState<string>("");
-
-  const onClick = async () => {
-    try {
-      navigator.clipboard.writeText(children);
-      setIcon("👍");
-      setTimeout(function () {
-        setIcon("");
-      }, 3000);
-    } catch (_) {}
-  };
-
-  return (
-    <div onClick={onClick}>
-      {children}
-      {icon}
-    </div>
-  );
-};
 const ColorMatch: React.FC<{ first: Color; second: Color }> = ({
   first,
   second,
