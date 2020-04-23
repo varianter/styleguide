@@ -127,11 +127,16 @@ export type ColorPair = {
   text: ValidColor;
   border?: ValidColor;
 };
+export type DefaultColorPair = {
+  bg: ValidDefaultColor;
+  text: ValidColor;
+  border?: ValidColor;
+};
 
 export type ColorSeries = ColorPair[];
 
 export type ColorSet = {
-  default: ColorPair;
+  default: DefaultColorPair;
   tint?: ColorSeries;
   shade?: ColorSeries;
 };

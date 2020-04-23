@@ -1,107 +1,39 @@
 import * as React from "react";
 import * as blobs2 from "blobs/v2";
-import { useState, useEffect } from "react";
-import { ValidColor, colorPairs } from "../color-grid/colors";
+import { useState, useEffect, ChangeEvent, useRef } from "react";
+import { colorPairs, ValidDefaultColor } from "../color-grid/colors";
 import css from "./blobs.module.css";
 import CopyableText from "../components/copyable-text";
-
-const Group: React.FC<{
-  name: string;
-}> = ({ name, children }) => {
-  return (
-    <div>
-      <h4>{name}</h4>
-
-      {children}
-    </div>
-  );
-};
-
-const DownloadLink: React.FC<{
-  svg: string;
-  size: number;
-  type?: "svg" | "png";
-}> = ({ svg, size, type = "svg" }) => {
-  const blobPngUrl = usePngBlobUrl(svg, size);
-  const url =
-    type === "svg" ? `data:image/svg+xml;base64,\n${btoa(svg)}` : blobPngUrl;
-
-  return (
-    <a href={url} download={`variant-blob.${type}`}>
-      Download {type}
-    </a>
-  );
-};
-
-function usePngBlobUrl(svgString: string, size: number) {
-  const [blobUrl, setBlobUrl] = useState<string | undefined>();
-
-  useEffect(
-    function () {
-      var canvas = document.createElement("canvas");
-      canvas.width = size;
-      canvas.height = size;
-      var ctx = canvas.getContext("2d");
-      var img = new Image();
-
-      var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-      var url = URL.createObjectURL(svg);
-
-      img.onload = function () {
-        ctx?.drawImage(img, 0, 0);
-        var png = canvas.toDataURL("image/png");
-        URL.revokeObjectURL(png);
-
-        setBlobUrl(canvas.toDataURL("image/png"));
-      };
-      img.src = url;
-    },
-    [svgString, size]
-  );
-
-  return blobUrl;
-}
-
-const Input: React.FC<{
-  val: number;
-  onInput: (val: number) => void;
-  min: number;
-  max: number;
-  step?: number;
-}> = ({ onInput, min, max, val, step = 1 }) => {
-  return (
-    <input
-      type="range"
-      min={min}
-      max={max}
-      step={step}
-      value={val}
-      onInput={(e) => onInput(Number(e.currentTarget.value))}
-    />
-  );
-};
+import SvgBlob, { blobAsString, SvgBlobProps } from "../components/svg-blob";
+import useThrottle from "@react-hook/throttle";
+import DownloadGroup from "./download-group";
 
 const BlobGenerator: React.FC<{}> = () => {
-  const [points, setPoints] = useState<number>(2);
-  const [size, setSize] = useState<number>(250);
-  const [randomness, setRandomness] = useState<number>(9);
-  const [fill, setFill] = useState<ValidColor>(colorPairs.primary.default.bg);
+  const [image, setImage] = useState<File | undefined>();
+  const [points, setPoints] = useThrottle<number>(2);
+  const [size, setSize] = useThrottle<number>(250);
+  const [randomness, setRandomness] = useThrottle<number>(9);
+  const [fill, setFill] = useThrottle<ValidDefaultColor>(
+    colorPairs.primary.default.bg
+  );
   const [seed, setSeed] = useState(Math.random());
-
   const random = () => setSeed(Math.random());
   useEffect(random, [points, randomness]);
 
-  const svgString = blobs2.svg(
-    {
-      seed,
-      extraPoints: points,
-      randomness,
-      size,
-    },
-    {
-      fill,
-    }
-  );
+  const svgPath = blobs2.svgPath({
+    seed,
+    extraPoints: points,
+    randomness,
+    size,
+  });
+
+  const svgOpts = {
+    path: svgPath,
+    color: fill,
+    size,
+    image,
+  };
+  // const svgString = blobAsString(svgOpts);
 
   return (
     <div>
@@ -123,26 +55,88 @@ const BlobGenerator: React.FC<{}> = () => {
       <Group name="Fill color">
         <input
           type="color"
-          onInput={(e) => setFill(e.currentTarget.value as ValidColor)}
+          onChange={(e) => setFill(e.currentTarget.value as ValidDefaultColor)}
           value={fill}
         />
+      </Group>
+
+      <Group name="Image (optional)">
+        <UploadFile value={image} onChange={setImage} />
       </Group>
 
       <button onClick={random} type="button">
         Random
       </button>
 
-      <div dangerouslySetInnerHTML={{ __html: svgString }}></div>
+      {/* <div dangerouslySetInnerHTML={{ __html: svgString }}></div> */}
+      <SvgBlob {...svgOpts} />
 
       <p className="caption">
         Seed: <CopyableText Component="span">{seed}</CopyableText>
       </p>
-      <p className={css.downloadLinks}>
-        <DownloadLink svg={svgString} size={size} type="svg" />
-        <DownloadLink svg={svgString} size={size} type="png" />
-      </p>
+      <div className={css.downloadLinks}>
+        <DownloadGroup seed={seed} {...svgOpts} />
+      </div>
     </div>
   );
 };
 
 export default BlobGenerator;
+
+const Group: React.FC<{
+  name: string;
+}> = ({ name, children }) => {
+  return (
+    <div>
+      <h4>{name}</h4>
+
+      {children}
+    </div>
+  );
+};
+
+const Input: React.FC<{
+  val: number;
+  onInput: (val: number) => void;
+  min: number;
+  max: number;
+  step?: number;
+}> = ({ onInput, min, max, val, step = 1 }) => {
+  return (
+    <input
+      type="range"
+      min={min}
+      max={max}
+      step={step}
+      value={val}
+      onChange={(e) => onInput(Number(e.currentTarget.value))}
+    />
+  );
+};
+
+const UploadFile: React.FC<{
+  value?: File;
+  onChange(imgBase64?: File): void;
+}> = ({ value, onChange }) => {
+  const ref = useRef<HTMLInputElement>(null);
+
+  const internalChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.currentTarget.files?.[0];
+    onChange(file);
+  };
+
+  useEffect(() => {
+    if (!value && ref.current) {
+      ref.current.value = "";
+    }
+  }, [value]);
+
+  return (
+    <input
+      ref={ref}
+      type="file"
+      accept="image/png, image/jpeg"
+      onChange={internalChange}
+    />
+  );
+};
