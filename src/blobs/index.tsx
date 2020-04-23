@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as blobs2 from "blobs/v2";
 import { useState, useEffect } from "react";
-import { Color, colorPairs } from "../color-grid/colors";
+import { ValidColor, colorPairs } from "../color-grid/colors";
 import css from "./blobs.module.css";
 import CopyableText from "../components/copyable-text";
 
@@ -85,7 +85,7 @@ const BlobGenerator: React.FC<{}> = () => {
   const [points, setPoints] = useState<number>(2);
   const [size, setSize] = useState<number>(250);
   const [randomness, setRandomness] = useState<number>(9);
-  const [fill, setFill] = useState<Color>(colorPairs.primary.default.bg);
+  const [fill, setFill] = useState<ValidColor>(colorPairs.primary.default.bg);
   const [seed, setSeed] = useState(Math.random());
 
   const random = () => setSeed(Math.random());
@@ -123,7 +123,7 @@ const BlobGenerator: React.FC<{}> = () => {
       <Group name="Fill color">
         <input
           type="color"
-          onInput={(e) => setFill(e.currentTarget.value)}
+          onInput={(e) => setFill(e.currentTarget.value as ValidColor)}
           value={fill}
         />
       </Group>

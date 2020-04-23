@@ -1,8 +1,131 @@
-export type Color = string;
+export const allColors: AllColorNames = {
+  primary: "#E61A6B",
+  primary__tint1: "#EB4889",
+  primary__tint2: "#F076A6",
+  primary__tint3: "#F5A4C4",
+  primary__tint4: "#FAD2E2",
+  primary__shade1: "#B91456",
+  primary__shade2: "#8B0F40",
+  primary__shade3: "#5D0A2B",
+  primary__shade4: "#2F0516",
+
+  secondary1: "#423D89",
+  secondary1__tint1: "#534DAC",
+  secondary1__tint2: "#736EBE",
+  secondary1__tint3: "#9591CE",
+  secondary1__tint4: "#B7B4DE",
+  secondary1__shade1: "#35316E",
+  secondary1__shade2: "#282552",
+  secondary1__shade3: "#1A1837",
+  secondary1__shade4: "#0D0C1B",
+
+  secondary2: "#03DAC6",
+  secondary2__tint1: "#35E1D1",
+  secondary2__tint2: "#68E9DD",
+  secondary2__tint3: "#9AF0E8",
+  secondary2__tint4: "#CDF8F4",
+  secondary2__shade1: "#02AE9E",
+  secondary2__shade2: "#028377",
+  secondary2__shade3: "#01574F",
+  secondary2__shade4: "#012C28",
+
+  secondary3: "#FFC4BC",
+  secondary3__tint1: "#FFD0C9",
+  secondary3__tint2: "#FFDCD7",
+  secondary3__tint3: "#FFE7E4",
+  secondary3__tint4: "#FFF3F2",
+  secondary3__shade1: "#CC9D96",
+  secondary3__shade2: "#997671",
+  secondary3__shade3: "#664E4B",
+  secondary3__shade4: "#332726",
+
+  secondary4: "#EDE8D7",
+  secondary4__tint1: "#F1EDDF",
+  secondary4__tint2: "#F4F1E7",
+  secondary4__tint3: "#F8F6EF",
+  secondary4__tint4: "#FBFAF7",
+  secondary4__shade1: "#BEBAAC",
+  secondary4__shade2: "#8E8B81",
+  secondary4__shade3: "#5F5D56",
+  secondary4__shade4: "#2F2E2B",
+
+  standard__black: "#333333",
+  standard__white: "#FFFFFF",
+};
+export type AllColorNames = {
+  primary: "#E61A6B";
+  primary__tint1: "#EB4889";
+  primary__tint2: "#F076A6";
+  primary__tint3: "#F5A4C4";
+  primary__tint4: "#FAD2E2";
+  primary__shade1: "#B91456";
+  primary__shade2: "#8B0F40";
+  primary__shade3: "#5D0A2B";
+  primary__shade4: "#2F0516";
+
+  secondary1: "#423D89";
+  secondary1__tint1: "#534DAC";
+  secondary1__tint2: "#736EBE";
+  secondary1__tint3: "#9591CE";
+  secondary1__tint4: "#B7B4DE";
+  secondary1__shade1: "#35316E";
+  secondary1__shade2: "#282552";
+  secondary1__shade3: "#1A1837";
+  secondary1__shade4: "#0D0C1B";
+
+  secondary2: "#03DAC6";
+  secondary2__tint1: "#35E1D1";
+  secondary2__tint2: "#68E9DD";
+  secondary2__tint3: "#9AF0E8";
+  secondary2__tint4: "#CDF8F4";
+  secondary2__shade1: "#02AE9E";
+  secondary2__shade2: "#028377";
+  secondary2__shade3: "#01574F";
+  secondary2__shade4: "#012C28";
+
+  secondary3: "#FFC4BC";
+  secondary3__tint1: "#FFD0C9";
+  secondary3__tint2: "#FFDCD7";
+  secondary3__tint3: "#FFE7E4";
+  secondary3__tint4: "#FFF3F2";
+  secondary3__shade1: "#CC9D96";
+  secondary3__shade2: "#997671";
+  secondary3__shade3: "#664E4B";
+  secondary3__shade4: "#332726";
+
+  secondary4: "#EDE8D7";
+  secondary4__tint1: "#F1EDDF";
+  secondary4__tint2: "#F4F1E7";
+  secondary4__tint3: "#F8F6EF";
+  secondary4__tint4: "#FBFAF7";
+  secondary4__shade1: "#BEBAAC";
+  secondary4__shade2: "#8E8B81";
+  secondary4__shade3: "#5F5D56";
+  secondary4__shade4: "#2F2E2B";
+
+  standard__black: "#333333";
+  standard__white: "#FFFFFF";
+};
+
+export type ValidColor = AllColorNames[keyof AllColorNames];
+export type ValidDefaultColor =
+  | AllColorNames["primary"]
+  | AllColorNames["secondary1"]
+  | AllColorNames["secondary2"]
+  | AllColorNames["secondary3"]
+  | AllColorNames["secondary4"]
+  | AllColorNames["standard__black"]
+  | AllColorNames["standard__white"];
+
+export const standardColors = {
+  black: "#333333" as AllColorNames["standard__black"],
+  white: "#FFFFFF" as AllColorNames["standard__white"],
+};
+
 export type ColorPair = {
-  bg: Color;
-  text: Color;
-  border?: Color;
+  bg: ValidColor;
+  text: ValidColor;
+  border?: ValidColor;
 };
 
 export type ColorSeries = ColorPair[];
@@ -13,28 +136,23 @@ export type ColorSet = {
   shade?: ColorSeries;
 };
 
-export const standardColors = {
-  black: "#333333",
-  white: "#FFFFFF",
-};
+type ColorNames =
+  | "primary"
+  | "secondary1"
+  | "secondary2"
+  | "secondary3"
+  | "secondary4"
+  | "standardBlack"
+  | "standardWhite";
 
-export const standardPairs: ColorScheme = [
-  {
-    default: {
-      bg: standardColors.black,
-      text: standardColors.white,
-    },
-  },
-  {
-    default: {
-      bg: standardColors.white,
-      text: standardColors.black,
-      border: standardColors.black,
-    },
-  },
-];
+type ColorNamesWithoutStandard = Exclude<
+  ColorNames,
+  "standardBlack" | "standardWhite"
+>;
 
-export const colorPairs = {
+export const colorPairs: {
+  [key in ColorNamesWithoutStandard]: ColorSet;
+} = {
   primary: {
     default: {
       bg: "#E61A6B",
@@ -96,11 +214,11 @@ export const colorPairs = {
       },
       {
         bg: "#9591CE",
-        text: "#333",
+        text: "#333333",
       },
       {
         bg: "#B7B4DE",
-        text: "#333",
+        text: "#333333",
       },
     ],
     shade: [
@@ -256,16 +374,34 @@ const scheme: ColorScheme = Object.values(colorPairs);
 
 export default scheme;
 
-export function getTextColor(color: Color): Color {
-  const res = scheme.concat(standardPairs).reduce(function (prev, c) {
-    if (prev) return prev;
-    if (c.default.bg === color) return c.default.text;
-    const tint = c.tint?.find((i) => i.bg === color)?.text;
-    if (tint) return tint;
-    const shade = c.shade?.find((i) => i.bg === color)?.text;
-    if (shade) return shade;
-    return "";
-  }, "");
+export const standardPairs: ColorScheme = [
+  {
+    default: {
+      bg: standardColors.black,
+      text: standardColors.white,
+    },
+  },
+  {
+    default: {
+      bg: standardColors.white,
+      text: standardColors.black,
+      border: standardColors.black,
+    },
+  },
+];
+
+export function getTextColor(color: ValidColor): ValidColor {
+  const res = scheme
+    .concat(standardPairs)
+    .reduce(function (prev: ValidColor | null, c: ColorSet) {
+      if (prev) return prev;
+      if (c.default.bg === color) return c.default.text;
+      const tint = c.tint?.find((i) => i.bg === color)?.text;
+      if (tint) return tint;
+      const shade = c.shade?.find((i) => i.bg === color)?.text;
+      if (shade) return shade;
+      return null;
+    }, null);
   if (!res) return standardColors.black;
   return res;
 }

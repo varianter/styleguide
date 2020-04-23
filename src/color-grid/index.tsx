@@ -3,7 +3,7 @@ import colorScheme, {
   standardPairs,
   ColorSet,
   ColorSeries,
-  Color,
+  ValidColor,
 } from "./colors";
 import css from "./color-grid.module.css";
 import { useState, useEffect } from "react";
@@ -34,8 +34,8 @@ const Series: React.FC<{
 
 const Swatch: React.FC<{
   set: ColorSet;
-  selectedId: Color | undefined;
-  onClick: (id: Color | undefined) => void;
+  selectedId: ValidColor | undefined;
+  onClick: (id: ValidColor | undefined) => void;
 }> = ({ set, onClick, selectedId }) => {
   const id = set.default.bg;
   const isActive = selectedId === id;
@@ -99,7 +99,7 @@ const Swatch: React.FC<{
   );
 };
 
-const ColorMatch: React.FC<{ first: Color; second: Color }> = ({
+const ColorMatch: React.FC<{ first: ValidColor; second: ValidColor }> = ({
   first,
   second,
 }) => {
@@ -124,7 +124,7 @@ const ColorMatch: React.FC<{ first: Color; second: Color }> = ({
     </div>
   );
 };
-const ColorExample: React.FC<{ bg: Color; color: Color }> = ({
+const ColorExample: React.FC<{ bg: ValidColor; color: ValidColor }> = ({
   bg,
   color,
   children,
@@ -148,7 +148,7 @@ const ColorMatchSet: React.FC = ({ children }) => {
 };
 
 export default function ColorGrid() {
-  const [index, selectIndex] = useState<Color | undefined>(undefined);
+  const [index, selectIndex] = useState<ValidColor | undefined>(undefined);
   useEscapeKey(() => selectIndex(undefined));
 
   return (
