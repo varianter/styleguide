@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as blobs2 from "blobs/v2";
 import { useState, useEffect, ChangeEvent, useRef } from "react";
-import { allColors } from "../color-grid/colors";
+import { allColorRecords, randomColorRecord } from "../color-grid/colors";
 import css from "./blobs.module.css";
 import CopyableText from "../components/copyable-text";
 import SvgBlob, { SvgBlobProps } from "../components/svg-blob";
@@ -9,15 +9,27 @@ import useThrottle from "@react-hook/throttle";
 import DownloadGroup from "./download-group";
 import ColorSelect, { ColorSelectValue } from "./color-select";
 
+type Range = {
+  min: number;
+  max: number;
+};
+
+const DEFAULTS_POINTS: Range = {
+  min: 3,
+  max: 15,
+} as const;
+
+const DEFAULTS_SPREAD: Range = {
+  min: 1,
+  max: 20,
+};
+
 const BlobGenerator: React.FC<{}> = () => {
   const [image, setImage] = useState<File | undefined>();
   const [points, setPoints] = useThrottle<number>(2);
   const [size, setSize] = useThrottle<number>(250);
   const [randomness, setRandomness] = useThrottle<number>(9);
-  const [color, setColor] = useThrottle<ColorSelectValue>({
-    value: allColors.primary,
-    label: "Primary",
-  });
+  const [color, setColor] = useThrottle<ColorSelectValue>(allColorRecords[0]);
   const [imageScale, setScale] = useThrottle<number>(100);
   const [imagePosition, setImagePosition] = useThrottle<{
     x: number;
@@ -25,8 +37,15 @@ const BlobGenerator: React.FC<{}> = () => {
   }>({ x: 0, y: 0 });
 
   const [seed, setSeed] = useState(Math.random());
-  const random = () => setSeed(Math.random());
-  useEffect(random, [points, randomness]);
+  const reshape = () => setSeed(Math.random());
+  useEffect(reshape, [points, randomness]);
+
+  const random = () => {
+    setPoints(pickRandom(DEFAULTS_POINTS));
+    setRandomness(pickRandom(DEFAULTS_POINTS));
+    setColor(randomColorRecord());
+    reshape();
+  };
 
   const svgPath = blobs2.svgPath({
     seed,
@@ -49,17 +68,22 @@ const BlobGenerator: React.FC<{}> = () => {
       <aside className={css.options}>
         <Group name="Points">
           <Input
-            min={3}
-            max={15}
+            min={DEFAULTS_POINTS.min}
+            max={DEFAULTS_POINTS.max}
             onInput={(i) => setPoints(i - 3)}
             val={points + 3}
           />
         </Group>
-        <Group name="size">
+        <Group name="Size">
           <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
         </Group>
         <Group name="Point spread">
-          <Input min={1} max={20} onInput={setRandomness} val={randomness} />
+          <Input
+            min={DEFAULTS_SPREAD.min}
+            max={DEFAULTS_SPREAD.max}
+            onInput={setRandomness}
+            val={randomness}
+          />
         </Group>
 
         <Group name="Fill color">
@@ -81,14 +105,18 @@ const BlobGenerator: React.FC<{}> = () => {
           )}
         </Group>
 
-        <button onClick={random} type="button">
-          Random
+        <button onClick={reshape} type="button">
+          Reshape
         </button>
       </aside>
 
       <div className={css.canvas}>
         <SvgBlob {...svgOpts} imagePositionChanged={setImagePosition} />
       </div>
+
+      <button className={css.randomButton} onClick={random} type="button">
+        Random
+      </button>
 
       <footer>
         <p className="caption">
@@ -161,3 +189,7 @@ const UploadFile: React.FC<{
     />
   );
 };
+
+function pickRandom({ min, max }: Range) {
+  return Math.random() * (max - min) + min;
+}

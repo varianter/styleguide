@@ -52,6 +52,14 @@ export const allColors: AllColorNames = {
   standard__black: "#333333",
   standard__white: "#FFFFFF",
 };
+
+export const allColorRecords = Object.entries(allColors).map(
+  ([label, value]) => ({
+    label,
+    value,
+  })
+);
+
 export type AllColorNames = {
   primary: "#E61A6B";
   primary__tint1: "#EB4889";
@@ -410,3 +418,7 @@ export function getTextColor(color: ValidColor): ValidColor {
   if (!res) return standardColors.black;
   return res;
 }
+
+export const randomColorRecord = () => {
+  return allColorRecords[Math.floor(Math.random() * allColorRecords.length)];
+};

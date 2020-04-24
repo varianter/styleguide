@@ -1,5 +1,5 @@
 import * as React from "react";
-import { allColors } from "../color-grid/colors";
+import { allColorRecords, randomColorRecord } from "../color-grid/colors";
 import Select, { Styles } from "react-select";
 
 export type ColorSelectValue = {
@@ -12,15 +12,6 @@ export type ColorSelectProps = {
   value: ColorSelectValue;
 };
 
-const options = Object.entries(allColors).map(([label, value]) => ({
-  label,
-  value,
-}));
-
-const randomColor = () => {
-  return options[Math.floor(Math.random() * options.length)];
-};
-
 const ColorSelect: React.FC<ColorSelectProps> = ({ value, onChange }) => {
   return (
     <>
@@ -28,7 +19,7 @@ const ColorSelect: React.FC<ColorSelectProps> = ({ value, onChange }) => {
         label="Colors"
         value={value}
         onChange={(v) => onChange(v as ColorSelectValue)}
-        options={options}
+        options={allColorRecords}
         styles={colourStyles}
       />
 
@@ -41,7 +32,7 @@ const ColorSelect: React.FC<ColorSelectProps> = ({ value, onChange }) => {
         value={value.value}
       />
 
-      <button onClick={() => onChange(randomColor())} type="button">
+      <button onClick={() => onChange(randomColorRecord())} type="button">
         Random color
       </button>
     </>
