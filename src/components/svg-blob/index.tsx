@@ -11,6 +11,7 @@ export type SvgBlobProps = {
   svgRef?: RefObject<SVGSVGElement> | null;
   image?: File;
   imageScale?: number;
+  imagePosition?: { x: number; y: number };
 };
 
 const SvgBlob: React.FC<SvgBlobProps> = React.memo(
@@ -23,6 +24,7 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
     svgRef,
     image,
     imageScale = 100,
+    imagePosition = { x: 0, y: 0 },
   }) => {
     const [imageString, setImageString] = useState<string>();
 
@@ -68,6 +70,8 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
               clipPath="url(#mask)"
               height={`${imageScale}%`}
               width={`${imageScale}%`}
+              x={imagePosition.x}
+              y={imagePosition.y}
               preserveAspectRatio="xMinYMin slice"
               xlinkHref={imageString}
             />
@@ -113,6 +117,8 @@ async function blobImageAsString({
   stroke = "none",
   strokeWidth = 0,
   image,
+  imageScale = 100,
+  imagePosition = { x: 0, y: 0 },
 }: SvgBlobProps) {
   const imageString = await new Promise(function (res) {
     if (!image) return res("");
@@ -134,8 +140,10 @@ async function blobImageAsString({
       </clipPath>
       <image
         clip-path="url(#mask)"
-        height="100%"
-        width="100%"
+        height="${imageScale}%"
+        width="${imageScale}%"
+        x="${imagePosition.x}"
+        y="${imagePosition.y}"
         preserveAspectRatio="xMinYMin slice"
         xlink:href="${imageString}"
       />

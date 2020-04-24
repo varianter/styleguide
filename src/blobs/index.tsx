@@ -4,7 +4,7 @@ import { useState, useEffect, ChangeEvent, useRef } from "react";
 import { colorPairs, ValidDefaultColor } from "../color-grid/colors";
 import css from "./blobs.module.css";
 import CopyableText from "../components/copyable-text";
-import SvgBlob, { blobAsString, SvgBlobProps } from "../components/svg-blob";
+import SvgBlob from "../components/svg-blob";
 import useThrottle from "@react-hook/throttle";
 import DownloadGroup from "./download-group";
 
@@ -17,6 +17,8 @@ const BlobGenerator: React.FC<{}> = () => {
     colorPairs.primary.default.bg
   );
   const [imageScale, setScale] = useThrottle<number>(100);
+  const [imageX, setImageX] = useThrottle<number>(0);
+  const [imageY, setImageY] = useThrottle<number>(0);
 
   const [seed, setSeed] = useState(Math.random());
   const random = () => setSeed(Math.random());
@@ -35,6 +37,7 @@ const BlobGenerator: React.FC<{}> = () => {
     size,
     image,
     imageScale,
+    imagePosition: { x: imageX, y: imageY },
   };
 
   return (
@@ -67,7 +70,13 @@ const BlobGenerator: React.FC<{}> = () => {
 
         {image && (
           <div>
+            <p>Image scale</p>
             <Input val={imageScale} min={10} max={200} onInput={setScale} />
+            <p>Image X</p>
+            <Input val={imageX} min={-size} max={size} onInput={setImageX} />
+            <p>Image Y</p>
+            <Input val={imageY} min={-size} max={size} onInput={setImageY} />
+
             <button onClick={() => setImage(undefined)} type="button">
               Clear image
             </button>
