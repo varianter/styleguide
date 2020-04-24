@@ -1,21 +1,23 @@
 import * as React from "react";
 import * as blobs2 from "blobs/v2";
 import { useState, useEffect, ChangeEvent, useRef } from "react";
-import { colorPairs, ValidDefaultColor } from "../color-grid/colors";
+import { allColors } from "../color-grid/colors";
 import css from "./blobs.module.css";
 import CopyableText from "../components/copyable-text";
-import SvgBlob from "../components/svg-blob";
+import SvgBlob, { SvgBlobProps } from "../components/svg-blob";
 import useThrottle from "@react-hook/throttle";
 import DownloadGroup from "./download-group";
+import ColorSelect, { ColorSelectValue } from "./color-select";
 
 const BlobGenerator: React.FC<{}> = () => {
   const [image, setImage] = useState<File | undefined>();
   const [points, setPoints] = useThrottle<number>(2);
   const [size, setSize] = useThrottle<number>(250);
   const [randomness, setRandomness] = useThrottle<number>(9);
-  const [fill, setFill] = useThrottle<ValidDefaultColor>(
-    colorPairs.primary.default.bg
-  );
+  const [color, setColor] = useThrottle<ColorSelectValue>({
+    value: allColors.primary,
+    label: "Primary",
+  });
   const [imageScale, setScale] = useThrottle<number>(100);
   const [imagePosition, setImagePosition] = useThrottle<{
     x: number;
@@ -33,9 +35,9 @@ const BlobGenerator: React.FC<{}> = () => {
     size,
   });
 
-  const svgOpts = {
+  const svgOpts: SvgBlobProps = {
     path: svgPath,
-    color: fill,
+    color: color.value,
     size,
     image,
     imageScale,
@@ -60,11 +62,7 @@ const BlobGenerator: React.FC<{}> = () => {
       </Group>
 
       <Group name="Fill color">
-        <input
-          type="color"
-          onChange={(e) => setFill(e.currentTarget.value as ValidDefaultColor)}
-          value={fill}
-        />
+        <ColorSelect onChange={setColor} value={color} />
       </Group>
 
       <Group name="Image (optional)">

@@ -5,7 +5,7 @@ import useDraggable from "./draggable";
 
 export type SvgBlobProps = {
   path: string;
-  color: ValidDefaultColor;
+  color: string;
   size?: number;
   stroke?: ValidDefaultColor | "none";
   strokeWidth?: number;
