@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ValidDefaultColor } from "../../color-grid/colors";
 import { RefObject, useState, useEffect } from "react";
+import useDraggable from "./draggable";
 
 export type SvgBlobProps = {
   path: string;
@@ -12,6 +13,7 @@ export type SvgBlobProps = {
   image?: File;
   imageScale?: number;
   imagePosition?: { x: number; y: number };
+  imagePositionChanged?(pos: { x: number; y: number }): void;
 };
 
 const SvgBlob: React.FC<SvgBlobProps> = React.memo(
@@ -24,9 +26,12 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
     svgRef,
     image,
     imageScale = 100,
-    imagePosition = { x: 0, y: 0 },
+    imagePositionChanged = () => {},
   }) => {
     const [imageString, setImageString] = useState<string>();
+    const { position: translation, drag } = useDraggable({
+      onDragEnd: imagePositionChanged,
+    });
 
     useEffect(
       function () {
@@ -66,14 +71,17 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
                 d={path}
               />
             </clipPath>
+
             <image
+              onMouseDown={drag}
               clipPath="url(#mask)"
               height={`${imageScale}%`}
               width={`${imageScale}%`}
-              x={imagePosition.x}
-              y={imagePosition.y}
+              x={translation.x}
+              y={translation.y}
               preserveAspectRatio="xMinYMin slice"
               xlinkHref={imageString}
+              style={{ cursor: "move" }}
             />
           </>
         )}

@@ -17,8 +17,10 @@ const BlobGenerator: React.FC<{}> = () => {
     colorPairs.primary.default.bg
   );
   const [imageScale, setScale] = useThrottle<number>(100);
-  const [imageX, setImageX] = useThrottle<number>(0);
-  const [imageY, setImageY] = useThrottle<number>(0);
+  const [imagePosition, setImagePosition] = useThrottle<{
+    x: number;
+    y: number;
+  }>({ x: 0, y: 0 });
 
   const [seed, setSeed] = useState(Math.random());
   const random = () => setSeed(Math.random());
@@ -37,7 +39,7 @@ const BlobGenerator: React.FC<{}> = () => {
     size,
     image,
     imageScale,
-    imagePosition: { x: imageX, y: imageY },
+    imagePosition,
   };
 
   return (
@@ -72,10 +74,6 @@ const BlobGenerator: React.FC<{}> = () => {
           <div>
             <p>Image scale</p>
             <Input val={imageScale} min={10} max={200} onInput={setScale} />
-            <p>Image X</p>
-            <Input val={imageX} min={-size} max={size} onInput={setImageX} />
-            <p>Image Y</p>
-            <Input val={imageY} min={-size} max={size} onInput={setImageY} />
 
             <button onClick={() => setImage(undefined)} type="button">
               Clear image
@@ -89,7 +87,7 @@ const BlobGenerator: React.FC<{}> = () => {
       </button>
 
       {/* <div dangerouslySetInnerHTML={{ __html: svgString }}></div> */}
-      <SvgBlob {...svgOpts} />
+      <SvgBlob {...svgOpts} imagePositionChanged={setImagePosition} />
 
       <p className="caption">
         Seed: <CopyableText Component="span">{seed}</CopyableText>
