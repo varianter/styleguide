@@ -10,6 +10,7 @@ export type SvgBlobProps = {
   strokeWidth?: number;
   svgRef?: RefObject<SVGSVGElement> | null;
   image?: File;
+  imageScale?: number;
 };
 
 const SvgBlob: React.FC<SvgBlobProps> = React.memo(
@@ -21,6 +22,7 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
     strokeWidth = 0,
     svgRef,
     image,
+    imageScale = 100,
   }) => {
     const [imageString, setImageString] = useState<string>();
 
@@ -64,8 +66,8 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
             </clipPath>
             <image
               clipPath="url(#mask)"
-              height="100%"
-              width="100%"
+              height={`${imageScale}%`}
+              width={`${imageScale}%`}
               preserveAspectRatio="xMinYMin slice"
               xlinkHref={imageString}
             />

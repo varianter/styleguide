@@ -16,6 +16,8 @@ const BlobGenerator: React.FC<{}> = () => {
   const [fill, setFill] = useThrottle<ValidDefaultColor>(
     colorPairs.primary.default.bg
   );
+  const [imageScale, setScale] = useThrottle<number>(100);
+
   const [seed, setSeed] = useState(Math.random());
   const random = () => setSeed(Math.random());
   useEffect(random, [points, randomness]);
@@ -32,8 +34,8 @@ const BlobGenerator: React.FC<{}> = () => {
     color: fill,
     size,
     image,
+    imageScale,
   };
-  // const svgString = blobAsString(svgOpts);
 
   return (
     <div>
@@ -62,6 +64,10 @@ const BlobGenerator: React.FC<{}> = () => {
 
       <Group name="Image (optional)">
         <UploadFile value={image} onChange={setImage} />
+
+        {image && (
+          <Input val={imageScale} min={10} max={200} onInput={setScale} />
+        )}
       </Group>
 
       <button onClick={random} type="button">
