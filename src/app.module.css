@@ -16,7 +16,7 @@
   bottom: 0;
   content: "";
   display: block;
-  background: var(--color-secondary4--default);
+  background: var(--color-secondary4);
   z-index: -1;
   opacity: var(--bg-opacity);
   transition: opacity 100ms ease-in;

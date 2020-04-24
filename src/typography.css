@@ -107,7 +107,7 @@ body {
   font-family: "Graphik Web", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--color-standardBlack);
+  color: var(--color-standard__black);
 }
 
 h1,

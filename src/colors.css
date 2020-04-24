@@ -1,10 +1,54 @@
 :root {
-  --color-standardBlack: #333333;
-  --color-standardWhite: #ffffff;
+  --color-primary: #e61a6b;
+  --color-primary__tint1: #eb4889;
+  --color-primary__tint2: #f076a6;
+  --color-primary__tint3: #f5a4c4;
+  --color-primary__tint4: #fad2e2;
+  --color-primary__shade1: #b91456;
+  --color-primary__shade2: #8b0f40;
+  --color-primary__shade3: #5d0a2b;
+  --color-primary__shade4: #2f0516;
 
-  --color-primary--default: #e61a6b;
-  --color-secondary1--default: #423d89;
-  --color-secondary2--default: #03dac6;
-  --color-secondary3--default: #ffc4bc;
-  --color-secondary4--default: #ede8d7;
+  --color-secondary1: #423d89;
+  --color-secondary1__tint1: #534dac;
+  --color-secondary1__tint2: #736ebe;
+  --color-secondary1__tint3: #9591ce;
+  --color-secondary1__tint4: #b7b4de;
+  --color-secondary1__shade1: #35316e;
+  --color-secondary1__shade2: #282552;
+  --color-secondary1__shade3: #1a1837;
+  --color-secondary1__shade4: #0d0c1b;
+
+  --color-secondary2: #03dac6;
+  --color-secondary2__tint1: #35e1d1;
+  --color-secondary2__tint2: #68e9dd;
+  --color-secondary2__tint3: #9af0e8;
+  --color-secondary2__tint4: #cdf8f4;
+  --color-secondary2__shade1: #02ae9e;
+  --color-secondary2__shade2: #028377;
+  --color-secondary2__shade3: #01574f;
+  --color-secondary2__shade4: #012c28;
+
+  --color-secondary3: #ffc4bc;
+  --color-secondary3__tint1: #ffd0c9;
+  --color-secondary3__tint2: #ffdcd7;
+  --color-secondary3__tint3: #ffe7e4;
+  --color-secondary3__tint4: #fff3f2;
+  --color-secondary3__shade1: #cc9d96;
+  --color-secondary3__shade2: #997671;
+  --color-secondary3__shade3: #664e4b;
+  --color-secondary3__shade4: #332726;
+
+  --color-secondary4: #ede8d7;
+  --color-secondary4__tint1: #f1eddf;
+  --color-secondary4__tint2: #f4f1e7;
+  --color-secondary4__tint3: #f8f6ef;
+  --color-secondary4__tint4: #fbfaf7;
+  --color-secondary4__shade1: #bebaac;
+  --color-secondary4__shade2: #8e8b81;
+  --color-secondary4__shade3: #5f5d56;
+  --color-secondary4__shade4: #2f2e2b;
+
+  --color-standard__black: #333333;
+  --color-standard__white: #ffffff;
 }
