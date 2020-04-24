@@ -92,3 +92,47 @@
 .buttonGroup button:first-child {
   margin-right: 0.5rem;
 }
+
+.fileContainer {
+  position: relative;
+}
+.clearIcon {
+  position: absolute;
+  border: 0;
+  background: none;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.fileInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.fileInput + label {
+  font-weight: normal;
+  color: var(--color-standard__white--text);
+  background-color: var(--color-standard__white);
+  /* transition: all 200ms ease-in; */
+
+  border: 1px solid var(--color-secondary4__shade2);
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.4rem;
+  display: block;
+
+  cursor: pointer;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 20px;
+}
+
+.fileInput:focus + label,
+.fileInput + label:hover {
+  border-color: var(--color-secondary4__shade1);
+}

@@ -74,9 +74,6 @@ const BlobGenerator: React.FC<{}> = () => {
             val={points + 3}
           />
         </Group>
-        <Group name="Size">
-          <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
-        </Group>
         <Group name="Point spread">
           <Input
             min={DEFAULTS_SPREAD.min}
@@ -85,10 +82,19 @@ const BlobGenerator: React.FC<{}> = () => {
             val={randomness}
           />
         </Group>
+        <button onClick={reshape} type="button">
+          Reshape
+        </button>
 
-        <Group name="Fill color">
-          <ColorSelect onChange={setColor} value={color} />
+        <Group name="Size">
+          <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
         </Group>
+
+        {!image && (
+          <Group name="Fill color">
+            <ColorSelect onChange={setColor} value={color} />
+          </Group>
+        )}
 
         <Group name="Image (optional)">
           <UploadFile value={image} onChange={setImage} />
@@ -97,17 +103,9 @@ const BlobGenerator: React.FC<{}> = () => {
             <div>
               <p>Image scale</p>
               <Input val={imageScale} min={10} max={200} onInput={setScale} />
-
-              <button onClick={() => setImage(undefined)} type="button">
-                Clear image
-              </button>
             </div>
           )}
         </Group>
-
-        <button onClick={reshape} type="button">
-          Reshape
-        </button>
       </aside>
 
       <div className={css.canvas}>
@@ -181,12 +179,31 @@ const UploadFile: React.FC<{
   }, [value]);
 
   return (
-    <input
-      ref={ref}
-      type="file"
-      accept="image/png, image/jpeg"
-      onChange={internalChange}
-    />
+    <div className={css.fileContainer}>
+      <input
+        ref={ref}
+        id="file-imageupload"
+        type="file"
+        accept="image/png, image/jpeg"
+        onChange={internalChange}
+        className={css.fileInput}
+      />
+      <label htmlFor="file-imageupload" title={value?.name}>
+        {value ? "File: " + value.name : "Choose file"}
+      </label>
+
+      {value && (
+        <button
+          className={css.clearIcon}
+          onClick={() => onChange(undefined)}
+          type="button"
+        >
+          <span role="img" aria-label="Clear image">
+            ❌
+          </span>
+        </button>
+      )}
+    </div>
   );
 };
 
