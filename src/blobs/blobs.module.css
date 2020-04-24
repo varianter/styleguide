@@ -93,6 +93,21 @@
   margin-right: 0.5rem;
 }
 
+.smallButton {
+  font-size: 0.8rem;
+  background: var(--color-secondary1__tint2);
+  color: var(--color-secondary1__tint2--text);
+  border: 0;
+  border-radius: 0.3rem;
+
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.rightPos {
+  display: flex;
+}
+
 .fileContainer {
   position: relative;
 }
@@ -135,4 +150,16 @@
 .fileInput:focus + label,
 .fileInput + label:hover {
   border-color: var(--color-secondary4__shade1);
+}
+
+.colorGroup {
+  margin-bottom: 1rem;
+}
+
+.customColorPickerContainer {
+  margin: 0.5rem 0;
+  display: block;
+}
+.customColorPickerContainer input {
+  margin-left: 0.5rem;
 }

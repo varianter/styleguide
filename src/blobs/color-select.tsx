@@ -1,6 +1,7 @@
 import * as React from "react";
 import { allColorRecords, randomColorRecord } from "../color-grid/colors";
 import Select, { Styles } from "react-select";
+import css from "./blobs.module.css";
 
 export type ColorSelectValue = {
   label: string;
@@ -14,7 +15,7 @@ export type ColorSelectProps = {
 
 const ColorSelect: React.FC<ColorSelectProps> = ({ value, onChange }) => {
   return (
-    <>
+    <div className={css.colorGroup}>
       <Select<ColorSelectValue>
         label="Colors"
         value={value}
@@ -23,19 +24,28 @@ const ColorSelect: React.FC<ColorSelectProps> = ({ value, onChange }) => {
         styles={colourStyles}
       />
 
-      <input
-        type="color"
-        onChange={(e) => {
-          const value = e.currentTarget.value;
-          onChange({ value, label: value });
-        }}
-        value={value.value}
-      />
+      <label className={css.customColorPickerContainer}>
+        All colors:
+        <input
+          type="color"
+          onChange={(e) => {
+            const value = e.currentTarget.value;
+            onChange({ value, label: value });
+          }}
+          value={value.value}
+        />
+      </label>
 
-      <button onClick={() => onChange(randomColorRecord())} type="button">
-        Random color
-      </button>
-    </>
+      <div className={css.rightPos}>
+        <button
+          className={css.smallButton}
+          onClick={() => onChange(randomColorRecord())}
+          type="button"
+        >
+          Random color
+        </button>
+      </div>
+    </div>
   );
 };
 export default ColorSelect;

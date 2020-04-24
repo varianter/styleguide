@@ -1,13 +1,26 @@
 import * as React from "react";
 import * as blobs2 from "blobs/v2";
 import { useState, useEffect, ChangeEvent, useRef } from "react";
-import { allColorRecords, randomColorRecord } from "../color-grid/colors";
+import {
+  allColorRecords,
+  randomColorRecord,
+  allColors,
+} from "../color-grid/colors";
 import css from "./blobs.module.css";
 import CopyableText from "../components/copyable-text";
 import SvgBlob, { SvgBlobProps } from "../components/svg-blob";
 import useThrottle from "@react-hook/throttle";
 import DownloadGroup from "./download-group";
 import ColorSelect, { ColorSelectValue } from "./color-select";
+
+import {
+  SliderInput,
+  SliderTrack,
+  SliderTrackHighlight,
+  SliderHandle,
+  SliderMarker,
+} from "@reach/slider";
+import "@reach/slider/styles.css";
 
 type Range = {
   min: number;
@@ -82,9 +95,12 @@ const BlobGenerator: React.FC<{}> = () => {
             val={randomness}
           />
         </Group>
-        <button onClick={reshape} type="button">
-          Reshape
-        </button>
+
+        <div className={css.rightPos}>
+          <button className={css.smallButton} onClick={reshape} type="button">
+            Reshape
+          </button>
+        </div>
 
         <Group name="Size">
           <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
@@ -135,8 +151,7 @@ const Group: React.FC<{
 }> = ({ name, children }) => {
   return (
     <div>
-      <h5>{name}</h5>
-
+      <p>{name}</p>
       {children}
     </div>
   );
@@ -150,14 +165,28 @@ const Input: React.FC<{
   step?: number;
 }> = ({ onInput, min, max, val, step = 1 }) => {
   return (
-    <input
-      type="range"
+    <SliderInput
       min={min}
       max={max}
       step={step}
+      onChange={(v) => onInput(v)}
       value={val}
-      onChange={(e) => onInput(Number(e.currentTarget.value))}
-    />
+      style={{
+        paddingTop: "1rem",
+        paddingBottom: "1rem",
+      }}
+    >
+      <SliderTrack style={{ background: allColors.secondary4__tint3 }}>
+        <SliderTrackHighlight style={{ background: allColors.secondary1 }} />
+        <SliderMarker value={val} />
+        <SliderHandle
+          style={{
+            borderColor: allColors.secondary1,
+            background: allColors.secondary1,
+          }}
+        />
+      </SliderTrack>
+    </SliderInput>
   );
 };
 
