@@ -112,7 +112,7 @@ const BlobGenerator: React.FC<{}> = () => {
           </Group>
         )}
 
-        <Group name="Image (optional)">
+        <Group name="Image (optional)" className={css.imageUploadGroup}>
           <UploadFile value={image} onChange={setImage} />
 
           {image && (
@@ -148,9 +148,10 @@ export default BlobGenerator;
 
 const Group: React.FC<{
   name: string;
-}> = ({ name, children }) => {
+  className?: string;
+}> = ({ name, children, className }) => {
   return (
-    <div>
+    <div className={className}>
       <p>{name}</p>
       {children}
     </div>
