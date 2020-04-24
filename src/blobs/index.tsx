@@ -45,55 +45,60 @@ const BlobGenerator: React.FC<{}> = () => {
   };
 
   return (
-    <div>
-      <Group name="Points">
-        <Input
-          min={3}
-          max={15}
-          onInput={(i) => setPoints(i - 3)}
-          val={points + 3}
-        />
-      </Group>
-      <Group name="size">
-        <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
-      </Group>
-      <Group name="Point spread">
-        <Input min={1} max={20} onInput={setRandomness} val={randomness} />
-      </Group>
+    <section className={css.container}>
+      <aside className={css.options}>
+        <Group name="Points">
+          <Input
+            min={3}
+            max={15}
+            onInput={(i) => setPoints(i - 3)}
+            val={points + 3}
+          />
+        </Group>
+        <Group name="size">
+          <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
+        </Group>
+        <Group name="Point spread">
+          <Input min={1} max={20} onInput={setRandomness} val={randomness} />
+        </Group>
 
-      <Group name="Fill color">
-        <ColorSelect onChange={setColor} value={color} />
-      </Group>
+        <Group name="Fill color">
+          <ColorSelect onChange={setColor} value={color} />
+        </Group>
 
-      <Group name="Image (optional)">
-        <UploadFile value={image} onChange={setImage} />
+        <Group name="Image (optional)">
+          <UploadFile value={image} onChange={setImage} />
 
-        {image && (
-          <div>
-            <p>Image scale</p>
-            <Input val={imageScale} min={10} max={200} onInput={setScale} />
+          {image && (
+            <div>
+              <p>Image scale</p>
+              <Input val={imageScale} min={10} max={200} onInput={setScale} />
 
-            <button onClick={() => setImage(undefined)} type="button">
-              Clear image
-            </button>
-          </div>
-        )}
-      </Group>
+              <button onClick={() => setImage(undefined)} type="button">
+                Clear image
+              </button>
+            </div>
+          )}
+        </Group>
 
-      <button onClick={random} type="button">
-        Random
-      </button>
+        <button onClick={random} type="button">
+          Random
+        </button>
+      </aside>
 
-      {/* <div dangerouslySetInnerHTML={{ __html: svgString }}></div> */}
-      <SvgBlob {...svgOpts} imagePositionChanged={setImagePosition} />
-
-      <p className="caption">
-        Seed: <CopyableText Component="span">{seed}</CopyableText>
-      </p>
-      <div className={css.downloadLinks}>
-        <DownloadGroup seed={seed} {...svgOpts} />
+      <div className={css.canvas}>
+        <SvgBlob {...svgOpts} imagePositionChanged={setImagePosition} />
       </div>
-    </div>
+
+      <footer>
+        <p className="caption">
+          Seed: <CopyableText Component="span">{seed}</CopyableText>
+        </p>
+        <div className={css.downloadLinks}>
+          <DownloadGroup seed={seed} {...svgOpts} />
+        </div>
+      </footer>
+    </section>
   );
 };
 
@@ -104,7 +109,7 @@ const Group: React.FC<{
 }> = ({ name, children }) => {
   return (
     <div>
-      <h4>{name}</h4>
+      <h5>{name}</h5>
 
       {children}
     </div>

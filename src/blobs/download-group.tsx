@@ -1,5 +1,6 @@
 import { SvgBlobProps, blobAsString } from "../components/svg-blob";
 import React from "react";
+import css from "./blobs.module.css";
 
 const DownloadGroup: React.FC<{ seed: number } & SvgBlobProps> = React.memo(
   ({ seed, ...props }) => {
@@ -15,9 +16,19 @@ const DownloadGroup: React.FC<{ seed: number } & SvgBlobProps> = React.memo(
       return download(filename, url);
     };
     return (
-      <div>
-        <button onClick={() => generateAndDownload("svg")}>Download svg</button>
-        <button onClick={() => generateAndDownload("png")}>Download png</button>
+      <div className={css.buttonGroup}>
+        <button
+          className={css.button}
+          onClick={() => generateAndDownload("svg")}
+        >
+          Download svg
+        </button>
+        <button
+          className={css.button}
+          onClick={() => generateAndDownload("png")}
+        >
+          Download png
+        </button>
       </div>
     );
   }

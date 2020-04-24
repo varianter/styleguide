@@ -1,6 +1,8 @@
+@import "../colors.css";
+
 .container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: minmax(auto, 35%) 4fr;
   grid-template-rows: 1fr auto;
 
   background-size: 30px 30px;
@@ -21,11 +23,59 @@
       #b8b8b8 75%,
       #b8b8b8
     );
+
+  border-radius: 0.5rem;
 }
 
 .container aside {
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  background: var(--color-secondary4__tint1);
+  grid-row: 1 / 3;
+  grid-column: 1;
+  padding: 1rem;
 }
 
 .container footer {
-  grid-column: 1 / 3;
+  background: rgba(255, 255, 255, 0.7);
+
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.3rem 1rem;
+
+  font-size: 1rem;
+}
+
+.canvas {
+  display: flex;
+}
+.canvas svg {
+  margin: auto;
+}
+
+.button {
+  background: var(--color-primary);
+  color: var(--color-primary--text);
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  font-size: 0.65rem;
+  border: 0;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: all 200ms ease-in;
+}
+.button:hover {
+  background: var(--color-primary__shade1);
+  color: var(--color-primary__shade1--text);
+}
+.button:active {
+  background: var(--color-primary__shade2);
+  color: var(--color-primary__shade2--text);
+}
+.buttonGroup button:first-child {
+  margin-right: 0.5rem;
 }
