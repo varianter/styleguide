@@ -189,3 +189,10 @@ p.caption {
   font-size: 0.65rem;
   line-height: 1.4;
 }
+
+button,
+input,
+textarea {
+  font-family: "Graphik Web", Arial, sans-serif;
+  font-size: 1rem;
+}
