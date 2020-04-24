@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ValidDefaultColor } from "../../color-grid/colors";
-import { RefObject, useState } from "react";
+import { RefObject, useState, useEffect } from "react";
 
 export type SvgBlobProps = {
   path: string;
@@ -26,7 +26,7 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
   }) => {
     const [imageString, setImageString] = useState<string>();
 
-    React.useEffect(
+    useEffect(
       function () {
         if (!image) return setImageString(undefined);
         const reader = new FileReader();
