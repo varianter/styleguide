@@ -66,7 +66,12 @@ const BlobGenerator: React.FC<{}> = () => {
         <UploadFile value={image} onChange={setImage} />
 
         {image && (
-          <Input val={imageScale} min={10} max={200} onInput={setScale} />
+          <div>
+            <Input val={imageScale} min={10} max={200} onInput={setScale} />
+            <button onClick={() => setImage(undefined)} type="button">
+              Clear image
+            </button>
+          </div>
         )}
       </Group>
 

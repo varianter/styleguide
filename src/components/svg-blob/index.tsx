@@ -28,7 +28,7 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
 
     React.useEffect(
       function () {
-        if (!image) return;
+        if (!image) return setImageString(undefined);
         const reader = new FileReader();
         reader.addEventListener("load", () =>
           setImageString(String(reader.result))
