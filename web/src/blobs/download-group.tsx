@@ -48,8 +48,8 @@ function generatePngBlobUrl(svgString: string, size: number) {
     const url = URL.createObjectURL(svg);
 
     img.onload = function () {
-      ctx?.drawImage(img, 0, 0);
-      const png = canvas.toDataURL("image/png", 100);
+      ctx?.drawImage(img, 0, 0, size, size);
+      const png = canvas.toDataURL("image/png", 1);
       URL.revokeObjectURL(png);
       res(png);
     };
