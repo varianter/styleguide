@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useState } from "react";
 
 import css from "./style.module.css";
+import useConfirmationText from "../use-confirmation-text";
 
 export type CopyableTextProps = {
   children: string | number;
@@ -14,20 +14,15 @@ const CopyableText: React.FC<CopyableTextProps> = ({
   Component = "div",
   withConfirmation = true,
 }) => {
-  const [icon, setIcon] = useState<string>("");
-
-  const onClick = async () => {
+  const handleCopy = () => {
     try {
       navigator.clipboard.writeText(String(children));
-
-      if (withConfirmation) {
-        setIcon("👍");
-        setTimeout(function () {
-          setIcon("");
-        }, 3000);
-      }
     } catch (_) {}
   };
+
+  const [onClick, icon] = useConfirmationText(handleCopy, {
+    active: withConfirmation,
+  });
 
   return (
     <Component onClick={onClick} className={css.copyable}>

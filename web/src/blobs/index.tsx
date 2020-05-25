@@ -77,70 +77,77 @@ const BlobGenerator: React.FC<{}> = () => {
   };
 
   return (
-    <section className={css.container}>
-      <aside className={css.options}>
-        <Group name="Points">
-          <Input
-            min={DEFAULTS_POINTS.min}
-            max={DEFAULTS_POINTS.max}
-            onInput={(i) => setPoints(i - 3)}
-            val={points + 3}
-          />
-        </Group>
-        <Group name="Point spread">
-          <Input
-            min={DEFAULTS_SPREAD.min}
-            max={DEFAULTS_SPREAD.max}
-            onInput={setRandomness}
-            val={randomness}
-          />
-        </Group>
-
-        <div className={css.rightPos}>
-          <button className={css.smallButton} onClick={reshape} type="button">
-            Reshape
-          </button>
-        </div>
-
-        <Group name="Size">
-          <Input min={100} max={1000} step={10} onInput={setSize} val={size} />
-        </Group>
-
-        {!image && (
-          <Group name="Fill color">
-            <ColorSelect onChange={setColor} value={color} />
+    <div>
+      <section className={css.container}>
+        <aside className={css.options}>
+          <Group name="Points">
+            <Input
+              min={DEFAULTS_POINTS.min}
+              max={DEFAULTS_POINTS.max}
+              onInput={(i) => setPoints(i - 3)}
+              val={points + 3}
+            />
           </Group>
-        )}
+          <Group name="Point spread">
+            <Input
+              min={DEFAULTS_SPREAD.min}
+              max={DEFAULTS_SPREAD.max}
+              onInput={setRandomness}
+              val={randomness}
+            />
+          </Group>
 
-        <Group name="Image (optional)" className={css.imageUploadGroup}>
-          <UploadFile value={image} onChange={setImage} />
+          <div className={css.rightPos}>
+            <button className={css.smallButton} onClick={reshape} type="button">
+              Reshape
+            </button>
+          </div>
 
-          {image && (
-            <div>
-              <p>Image scale</p>
-              <Input val={imageScale} min={10} max={200} onInput={setScale} />
-            </div>
+          <Group name="Size">
+            <Input
+              min={100}
+              max={1000}
+              step={10}
+              onInput={setSize}
+              val={size}
+            />
+          </Group>
+
+          {!image && (
+            <Group name="Fill color">
+              <ColorSelect onChange={setColor} value={color} />
+            </Group>
           )}
-        </Group>
-      </aside>
 
-      <div className={css.canvas}>
-        <SvgBlob {...svgOpts} imagePositionChanged={setImagePosition} />
-      </div>
+          <Group name="Image (optional)" className={css.imageUploadGroup}>
+            <UploadFile value={image} onChange={setImage} />
 
-      <button className={css.randomButton} onClick={random} type="button">
-        Random
-      </button>
+            {image && (
+              <div>
+                <p>Image scale</p>
+                <Input val={imageScale} min={10} max={200} onInput={setScale} />
+              </div>
+            )}
+          </Group>
+        </aside>
 
-      <footer>
-        <p className="caption">
-          Seed: <CopyableText Component="span">{seed}</CopyableText>
-        </p>
-        <div className={css.downloadLinks}>
-          <DownloadGroup seed={seed} {...svgOpts} />
+        <div className={css.canvas}>
+          <SvgBlob {...svgOpts} imagePositionChanged={setImagePosition} />
         </div>
-      </footer>
-    </section>
+
+        <button className={css.randomButton} onClick={random} type="button">
+          Random
+        </button>
+
+        <footer>
+          <DownloadGroup seed={seed} {...svgOpts} />
+        </footer>
+      </section>
+
+      <p className="caption">
+        Seed: <CopyableText Component="span">{seed}</CopyableText>
+      </p>
+    </div>
   );
 };
 
