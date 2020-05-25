@@ -16,11 +16,11 @@ const DownloadGroup: React.FC<{ seed: number } & SvgBlobProps> = React.memo(
 
       return download(filename, url);
     };
-
     const copyPng = async () => {
       const svgString = await blobAsString(props);
       copySvgStringAsPngOnClipboard(svgString, props.size!);
     };
+    const isCopyToPngClipboardSupported = "ClipboardItem" in window;
     const [onCopyPngClick, confirmationIcon] = useConfirmationText(copyPng);
 
     return (
@@ -37,9 +37,11 @@ const DownloadGroup: React.FC<{ seed: number } & SvgBlobProps> = React.memo(
         >
           Download png
         </button>
-        <button className={css.saveButton} onClick={onCopyPngClick}>
-          Copy PNG{confirmationIcon}
-        </button>
+        {isCopyToPngClipboardSupported && (
+          <button className={css.saveButton} onClick={onCopyPngClick}>
+            Copy PNG{confirmationIcon}
+          </button>
+        )}
       </div>
     );
   }
