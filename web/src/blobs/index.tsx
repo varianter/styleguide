@@ -119,9 +119,7 @@ const BlobGenerator: React.FC<{}> = () => {
             />
           </Group>
 
-          <Group name="Seed">
-            <NumberField onInput={setSeed} val={seed} />
-          </Group>
+          <NumberField onInput={setSeed} val={seed} label="Seed" />
 
           <div className={css.rightPos} style={{ margin: "1px" }}>
             <button className={css.smallButton} onClick={reshape} type="button">
@@ -270,8 +268,9 @@ const UploadFile: React.FC<{
 const NumberField: React.FC<{
   onInput: (value: number) => void;
   val: number;
+  label: string;
   placeholder?: string;
-}> = ({ val, onInput, placeholder = "Enter value here" }) => {
+}> = ({ val, onInput, placeholder = "Enter value here", label }) => {
   const internalChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = Number(e.target.value);
@@ -288,14 +287,17 @@ const NumberField: React.FC<{
   );
 
   return (
-    <input
-      key="numberField"
-      type="text"
-      onChange={internalChange}
-      value={val}
-      placeholder={placeholder}
-      className={css.textField}
-    />
+    <>
+      <label htmlFor="numberField">{label}</label>
+      <input
+        id="numberField"
+        type="text"
+        onChange={internalChange}
+        value={val}
+        placeholder={placeholder}
+        className={css.textField}
+      />
+    </>
   );
 };
 
