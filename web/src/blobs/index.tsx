@@ -290,6 +290,7 @@ const NumberField: React.FC<{
     <>
       <label htmlFor="numberField">{label}</label>
       <input
+        aria-label={label}
         id="numberField"
         type="text"
         onChange={internalChange}
