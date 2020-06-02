@@ -64,7 +64,7 @@ const BlobGenerator: React.FC<{}> = () => {
     reshape();
   };
   // Random seed initially, keep to tweak with points.
-  useEffect(random, []);
+  useEffect(reshape, []);
 
   const svgPath = blobs2.svgPath({
     seed,
