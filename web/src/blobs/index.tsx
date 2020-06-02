@@ -1,6 +1,11 @@
-import * as React from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import * as blobs2 from "blobs/v2";
-import { useState, useEffect, ChangeEvent, useRef } from "react";
 import {
   allColorRecords,
   randomColorRecord,
@@ -49,9 +54,8 @@ const BlobGenerator: React.FC<{}> = () => {
     y: number;
   }>({ x: 0, y: 0 });
 
-  const [seed, setSeed] = useState(Math.random());
-  const reshape = () => setSeed(Math.random());
-  useEffect(reshape, [points, randomness]);
+  const [seed, setSeed] = useState(Math.floor(Math.random() * 10 ** 16));
+  const reshape = () => setSeed(Math.floor(Math.random() * 10 ** 16));
 
   const random = () => {
     setPoints(pickRandom(DEFAULTS_POINTS));
@@ -59,6 +63,8 @@ const BlobGenerator: React.FC<{}> = () => {
     setColor(randomColorRecord());
     reshape();
   };
+  // Random seed initially, keep to tweak with points.
+  useEffect(reshape, []);
 
   const svgPath = blobs2.svgPath({
     seed,
@@ -112,6 +118,21 @@ const BlobGenerator: React.FC<{}> = () => {
               val={size}
             />
           </Group>
+
+          <NumberField onInput={setSeed} val={seed} label="Seed" />
+
+          <div className={css.rightPos}>
+            <button className={css.smallButton} onClick={reshape} type="button">
+              Random Seed
+            </button>
+            <CopyableText
+              Component="button"
+              className={css.smallButton}
+              overrideCopyValue={seed}
+            >
+              Copy seed
+            </CopyableText>
+          </div>
 
           {!image && (
             <Group name="Fill color">
@@ -241,6 +262,43 @@ const UploadFile: React.FC<{
         </button>
       )}
     </div>
+  );
+};
+
+const NumberField: React.FC<{
+  onInput: (value: number) => void;
+  val: number;
+  label: string;
+  placeholder?: string;
+}> = ({ val, onInput, placeholder = "Enter value here", label }) => {
+  const internalChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const value = Number(e.target.value);
+      if (
+        value < Number.MAX_SAFE_INTEGER &&
+        value >= 0 &&
+        !isNaN(value) &&
+        isFinite(value)
+      ) {
+        onInput(value);
+      }
+    },
+    [onInput]
+  );
+
+  return (
+    <>
+      <label htmlFor="numberField">{label}</label>
+      <input
+        aria-label={label}
+        id="numberField"
+        type="text"
+        onChange={internalChange}
+        value={val}
+        placeholder={placeholder}
+        className={css.textField}
+      />
+    </>
   );
 };
 

@@ -107,6 +107,11 @@
 
 .rightPos {
   display: flex;
+  margin: 1px 0;
+}
+
+.rightPos button:nth-child(n + 2) {
+  margin-left: 2px;
 }
 
 .fileContainer {
@@ -167,4 +172,25 @@
 
 .imageUploadGroup {
   margin-top: 3rem;
+}
+
+.textField {
+  width: 100%;
+  font-weight: normal;
+  color: var(--color-standard__white--text);
+  background-color: var(--color-standard__white);
+  /* transition: all 200ms ease-in; */
+
+  border: 1px solid var(--color-secondary4__shade2);
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.4rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 20px;
+}
+
+.textField:focus,
+.textField:hover {
+  border-color: var(--color-secondary4__shade1);
 }
