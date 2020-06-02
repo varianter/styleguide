@@ -3,20 +3,26 @@ import * as React from "react";
 import css from "./style.module.css";
 import useConfirmationText from "../use-confirmation-text";
 
-export type CopyableTextProps = {
+export interface CopyableTextProps extends React.ComponentPropsWithoutRef<any> {
   children: string | number;
   Component?: React.ReactType;
   withConfirmation?: boolean;
-};
+  overrideCopyValue?: string | number;
+}
 
 const CopyableText: React.FC<CopyableTextProps> = ({
   children,
   Component = "div",
   withConfirmation = true,
+  className,
+  overrideCopyValue,
+  ...props
 }) => {
-  const handleCopy = () => {
+  const handleCopy = async () => {
     try {
-      navigator.clipboard.writeText(String(children));
+      navigator.clipboard.writeText(
+        String(overrideCopyValue ? overrideCopyValue : children)
+      );
     } catch (_) {}
   };
 
@@ -25,7 +31,11 @@ const CopyableText: React.FC<CopyableTextProps> = ({
   });
 
   return (
-    <Component onClick={onClick} className={css.copyable}>
+    <Component
+      onClick={onClick}
+      className={`${className || ""} ${css.copyable}`}
+      {...props}
+    >
       {children}
       {icon}
     </Component>
