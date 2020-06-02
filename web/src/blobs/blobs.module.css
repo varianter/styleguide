@@ -107,6 +107,7 @@
 
 .rightPos {
   display: flex;
+  margin: 1px 0;
 }
 
 .rightPos button:nth-child(n + 2) {
@@ -192,8 +193,4 @@
 .textField:focus,
 .textField:hover {
   border-color: var(--color-secondary4__shade1);
-}
-
-.buttonGroup {
-  display: flex;
 }

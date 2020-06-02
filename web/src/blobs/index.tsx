@@ -121,7 +121,7 @@ const BlobGenerator: React.FC<{}> = () => {
 
           <NumberField onInput={setSeed} val={seed} label="Seed" />
 
-          <div className={css.rightPos} style={{ margin: "1px" }}>
+          <div className={css.rightPos}>
             <button className={css.smallButton} onClick={reshape} type="button">
               Random Seed
             </button>
