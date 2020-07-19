@@ -5,24 +5,20 @@
   "description": "Variant Profile Info library",
   "author": "Mikael Brevik <mb@variant.no>",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.js",
-  "directories": {
-    "dist": "dist"
-  },
-  "files": [
-    "dist"
-  ],
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "tsc -p tsconfig.build.json && yarn css",
-    "prepare": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' 'package.json' 'README.md' dist/"
+    "copy:css": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' dist/",
+    "copy:manifest": "copyfiles 'package.json' 'README.md' dist/",
+    "prepare": "yarn copy:css && yarn copy:manifest"
   },
   "devDependencies": {
     "copyfiles": "^2.3.0",
     "typescript": "^3.9.5"
   },
-  "gitHead": "162e2961d8d254ce559ddf93b518d195f0616749",
+  "gitHead": "c1c5d988411886d81b7a06a205434e72ad1d8d55",
   "publishConfig": {
     "access": "public"
   }
