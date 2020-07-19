@@ -20,6 +20,7 @@
   },
   "gitHead": "c1c5d988411886d81b7a06a205434e72ad1d8d55",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist"
   }
 }
