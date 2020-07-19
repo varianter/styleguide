@@ -20,5 +20,6 @@
   "devDependencies": {
     "copyfiles": "^2.3.0",
     "typescript": "^3.9.5"
-  }
+  },
+  "gitHead": "dc184de36a2f96026972deec81657a753b6304f6"
 }
