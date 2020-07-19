@@ -1,6 +1,7 @@
 {
   "name": "@variant/profile",
   "version": "1.0.2",
+  "private": false,
   "description": "Variant Profile Info library",
   "author": "Mikael Brevik <mb@variant.no>",
   "license": "MIT",
@@ -21,5 +22,8 @@
     "copyfiles": "^2.3.0",
     "typescript": "^3.9.5"
   },
-  "gitHead": "dc184de36a2f96026972deec81657a753b6304f6"
+  "gitHead": "162e2961d8d254ce559ddf93b518d195f0616749",
+  "publishConfig": {
+    "access": "public"
+  }
 }
