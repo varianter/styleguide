@@ -1,6 +1,6 @@
 {
   "name": "@variant/styleguide",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Variant Style Guide Contents",
   "author": "Mikael Brevik <mb@variant.no>",
@@ -9,16 +9,16 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
-    "typescript": "^3.9.5",
-    "@types/react-select": "^3.0.13"
+    "@types/react-select": "^3.0.13",
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "@reach/slider": "^0.10.5",
     "@react-hook/throttle": "^2.2.0",
+    "@variant/profile": "^1.0.1",
     "blobs": "^2.1.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
-    "react-select": "^3.1.0",
-    "@variant/profile": "*"
+    "react-select": "^3.1.0"
   }
 }

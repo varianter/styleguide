@@ -1,6 +1,6 @@
 {
   "name": "@variant/profile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Variant Profile Info library",
   "author": "Mikael Brevik <mb@variant.no>",
   "license": "MIT",
@@ -20,6 +20,5 @@
   "devDependencies": {
     "copyfiles": "^2.3.0",
     "typescript": "^3.9.5"
-  },
-  "dependencies": {}
+  }
 }
