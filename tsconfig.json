@@ -1,7 +1,7 @@
 {
-  "extends": "../tsconfig.build.json",
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": "..",
+    "baseUrl": ".",
     "paths": {
       "@variant/*": ["packages/*/src"],
       "@variant/profile/*": ["packages/profile/src/*"],

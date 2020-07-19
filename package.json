@@ -1,35 +1,24 @@
 {
   "name": "@variant/profile-monorepo",
-  "version": "0.0.1",
-  "description": "Monorepo @variant/profile",
-  "main": "index.js",
-  "license": "MIT",
   "private": true,
   "workspaces": [
     "packages/*",
     "web"
   ],
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "Mikael Brevik <mb@variant.no>",
+  "license": "MIT",
+  "description": "Monorepo for Variant Styleguide and Components",
   "devDependencies": {
-    "@types/node": "^13.13.4",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.7",
-    "cra-workspaces": "2.0.0",
-    "react-scripts": "^3.4.1",
-    "typescript": "~3.8.3"
+    "lerna": "^3.22.1",
+    "typescript": "^3.9.7"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {},
+  "scripts": {
+    "clean": "lerna run clean",
+    "pub": "lerna publish",
+    "build-all": "lerna run build",
+    "build": "yarn workspace @variant/styleguide-web build"
   }
 }

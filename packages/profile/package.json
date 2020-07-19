@@ -1,0 +1,25 @@
+{
+  "name": "@variant/profile",
+  "version": "1.0.0",
+  "description": "Variant Profile Info library",
+  "author": "Mikael Brevik <mb@variant.no>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
+  "directories": {
+    "dist": "dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "tsc -p tsconfig.build.json && yarn css",
+    "css": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' dist/"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.3.0",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {}
+}
