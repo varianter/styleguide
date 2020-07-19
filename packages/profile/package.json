@@ -16,7 +16,7 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "tsc -p tsconfig.build.json && yarn css",
-    "css": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' dist/"
+    "prepare": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' 'package.json' 'README.md' dist/"
   },
   "devDependencies": {
     "copyfiles": "^2.3.0",
