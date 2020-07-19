@@ -1,6 +1,6 @@
 {
   "name": "@variant/styleguide",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "description": "Variant Style Guide Contents",
   "author": "Mikael Brevik <mb@variant.no>",
@@ -15,7 +15,7 @@
   "dependencies": {
     "@reach/slider": "^0.10.5",
     "@react-hook/throttle": "^2.2.0",
-    "@variant/profile": "^1.0.3",
+    "@variant/profile": "^1.0.4",
     "blobs": "^2.1.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
