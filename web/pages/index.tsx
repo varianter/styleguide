@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import ColorSection from "@variant/styleguide/color-grid";
 import TypographyInfo from "@variant/styleguide/typopgraphy-info";
 import BlobGenerator from "@variant/styleguide/blobs";
+import { BaseBlob, AnimatedBlob } from "@variant/components/blob";
 import Head from "next/head";
 
 import css from "@variant/styleguide/pages/app.module.css";
@@ -54,6 +55,57 @@ const Home = () => {
         <h2>Blobs</h2>
 
         <BlobGenerator />
+      </div>
+      <div className={css.section}>
+        <h2>Components</h2>
+        <h3>Blob</h3>
+        <p>
+          Using the same seed, points, and pointSpread values as generator
+          above.
+        </p>
+        <p>Size of blob is calcuated as min(width, height).</p>
+        <BaseBlob height={150} width={150} seed="Variant" />
+        <pre>
+          <code>{`<BaseBlob height={150} width={150} seed="Variant" />`}</code>
+        </pre>
+        <BaseBlob
+          height={150}
+          width={150}
+          seed="Variant"
+          imgSource={"/logo-192.png"}
+        />
+        <pre>
+          <code>
+            {`<VariantBlob
+  height={150}
+  width={150}
+  seed="Variant"
+  imgSource="/logo-192.png"
+/>`}
+          </code>
+        </pre>
+        <AnimatedBlob height={150} width={150} seed="Variant" />
+        <pre>
+          <code>
+            {`<AnimatedBlob height={150} width={150} seed="Variant" />`}
+          </code>
+        </pre>
+        <AnimatedBlob
+          height={150}
+          width={150}
+          seed="Variant"
+          imgSource={"/logo-192.png"}
+        />
+        <pre>
+          <code>
+            {`<AnimatedBlob
+  height={150}
+  width={150}
+  seed="Variant"
+  imgSource={"/logo-192.png"}
+/>`}
+          </code>
+        </pre>
       </div>
     </div>
   );

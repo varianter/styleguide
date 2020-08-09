@@ -1,0 +1,21 @@
+{
+  "name": "@variant/components",
+  "version": "1.0.6",
+  "private": true,
+  "description": "Variant Styled Components",
+  "author": "Mathias Flått <mf@variant.no>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "@variant/profile": "^1.0.6",
+    "blobs": "^2.1.0",
+    "react": "16.13.0",
+    "react-dom": "16.13.0",
+    "react-select": "^3.1.0"
+  }
+}

@@ -7,7 +7,7 @@ import {
   allColors,
 } from "@variant/profile/colors";
 import css from "./blobs.module.css";
-import CopyableText from "../components/copyable-text";
+import CopyableText from "@variant/components/copyable-text";
 import SvgBlob, { SvgBlobProps } from "../components/svg-blob";
 import { useThrottle } from "@react-hook/throttle";
 import DownloadGroup from "./download-group";
