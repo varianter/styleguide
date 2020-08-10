@@ -4,6 +4,7 @@ import { BlobProps } from "./base";
 import { colors } from "@variant/profile";
 import { useIsMountedRef } from "../utils/useMounted";
 import { useReducedMotion } from "framer-motion";
+import { BlobOptions } from "blobs/v2";
 
 type AnimatedBlobProps = BlobProps & {
   animationSpeed?: number;
@@ -21,8 +22,26 @@ export const AnimatedBlob: React.FC<AnimatedBlobProps> = memo(
     ...rest
   }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    const blobStateRef = useRef<BlobOptions>({
+      seed,
+      extraPoints,
+      randomness,
+      size: Math.min(width, height),
+    });
     const isMountedRef = useIsMountedRef();
     const reduceMotion = useReducedMotion();
+
+    const morphBlob = useCallback((): BlobOptions => {
+      const newState = {
+        ...blobStateRef.current,
+        extraPoints: randomize(blobStateRef.current.extraPoints, 2),
+        randomness: randomize(blobStateRef.current.randomness, 2),
+      };
+      // Save so we can use next itteration
+      blobStateRef.current = newState;
+      return newState;
+    }, []);
 
     const startAnimation = useCallback(
       (
@@ -53,12 +72,7 @@ export const AnimatedBlob: React.FC<AnimatedBlobProps> = memo(
           animation.transition({
             duration: 3500,
             callback: renderLoop,
-            blobOptions: {
-              seed,
-              randomness,
-              extraPoints: randomize(extraPoints, 4),
-              size: Math.min(width, height),
-            },
+            blobOptions: morphBlob(),
           });
         };
 
@@ -66,12 +80,7 @@ export const AnimatedBlob: React.FC<AnimatedBlobProps> = memo(
         animation.transition({
           duration: 0, // Render immediately.
           callback: renderLoop,
-          blobOptions: {
-            seed,
-            extraPoints,
-            randomness,
-            size: Math.min(width, height),
-          },
+          blobOptions: blobStateRef.current,
         });
       },
       [seed, extraPoints, randomness, height, width, reduceMotion]
