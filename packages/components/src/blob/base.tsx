@@ -46,13 +46,21 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
         <path fill={color.bg} d={blobPath} />
       </svg>
     ) : (
-      <img
-        src={imgSource}
-        alt={imgSource}
-        height={height}
-        width={width}
-        style={{ clipPath: `path('${blobPath}')` }}
-      />
+      <>
+        <img
+          src={imgSource}
+          height={height}
+          width={width}
+          style={{ clipPath: "url(#blobPath)" }}
+        />
+        <svg height={0} width={0}>
+          <defs>
+            <clipPath id="blobPath">
+              <path d={blobPath}></path>
+            </clipPath>
+          </defs>
+        </svg>
+      </>
     );
   }
 );
