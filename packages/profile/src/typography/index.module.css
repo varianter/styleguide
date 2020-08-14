@@ -96,11 +96,6 @@ html {
     font-size: 14px;
   }
 }
-@media (max-width: 600px) {
-  html {
-    font-size: 12px;
-  }
-}
 body {
   font-family: "Graphik Web", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
