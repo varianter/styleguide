@@ -1,6 +1,6 @@
 {
   "name": "@variant/profile",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": false,
   "description": "Variant Profile Info library",
   "author": "Mikael Brevik <mb@variant.no>",
