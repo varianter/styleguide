@@ -1,13 +1,6 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@variant/*": ["packages/*/src"],
-      "@variant/profile/*": ["packages/profile/src/*"],
-      "@variant/styleguide/*": ["packages/styleguide/src/*"],
-      "@variant/components/*": ["packages/components/src/*"]
-    },
     "module": "esnext",
     "jsx": "preserve",
     "noEmit": true

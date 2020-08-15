@@ -5,6 +5,8 @@
   "description": "Variant Styled Components",
   "author": "Mathias Flått <mf@variant.no>",
   "license": "MIT",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "tsc -p tsconfig.build.json && yarn prepare",

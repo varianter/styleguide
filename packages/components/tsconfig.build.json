@@ -4,8 +4,10 @@
     "target": "es2015",
     "declaration": true,
     "outDir": "./dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "jsx": "react"
   },
+  "include": ["src", "global.d.ts"],
   "exclude": ["node_modules"],
-  "include": ["src", "global.d.ts"]
+  "references": [{ "path": "../profile/tsconfig.build.json" }]
 }
