@@ -4,7 +4,12 @@
     "module": "esnext",
     "jsx": "preserve",
     "noEmit": true,
-    "rootDir": "."
+    "baseUrl": ".",
+    "paths": {
+      "@variant/*/lib": ["packages/*/src"],
+      "@variant/profile/lib/*": ["packages/profile/src/*"],
+      "@variant/components/lib/*": ["packages/components/src/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

@@ -12,10 +12,10 @@
   ],
   "scripts": {
     "tsc": "tsc",
+    "clean": "rm -rf lib",
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "build": "tsc -p tsconfig.build.json",
-    "copy:css": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' dist/",
-    "prepare": "yarn copy:css"
+    "build": "yarn copy:css && tsc -p tsconfig.build.json",
+    "copy:css": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' lib/"
   },
   "devDependencies": {
     "copyfiles": "^2.3.0",

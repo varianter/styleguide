@@ -1,16 +1,16 @@
 {
-  "extends": "../tsconfig.build.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "..",
-    "paths": {
-      "@variant/*": ["packages/*/src"],
-      "styleguide/*": ["./web/styleguide/*"],
-      "@variant/profile/*": ["packages/profile/src/*"],
-      "@variant/components/*": ["packages/components/src/*"]
-    },
     "module": "esnext",
     "jsx": "preserve",
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": "..",
+    "paths": {
+      "@variant/*/lib": ["packages/*/src"],
+      "@variant/profile/lib/*": ["packages/profile/src/*"],
+      "@variant/components/lib/*": ["packages/components/src/*"],
+      "styleguide/*": ["web/styleguide/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

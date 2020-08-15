@@ -27,8 +27,7 @@
     "skipLibCheck": true,
     "noImplicitAny": true,
 
-    "noEmit": false,
-    "rootDir": "."
+    "noEmit": false
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

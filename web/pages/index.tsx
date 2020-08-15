@@ -1,4 +1,4 @@
-import { AnimatedBlob, BaseBlob } from "@variant/components/blob";
+import { AnimatedBlob, BaseBlob } from "@variant/components/lib/blob";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import BlobGenerator from "styleguide/blobs";
@@ -6,9 +6,9 @@ import ColorSection from "styleguide/color-grid";
 import css from "styleguide/pages/app.module.css";
 import TypographyInfo from "styleguide/typopgraphy-info";
 
-const favicon = require("@variant/profile/logo/favicon.png");
-const logoBw = require("@variant/profile/logo/variant-bw.svg");
-const logoColors = require("@variant/profile/logo/variant-colors.svg");
+const favicon = require("@variant/profile/lib/logo/favicon.png");
+const logoBw = require("@variant/profile/lib/logo/variant-bw.svg");
+const logoColors = require("@variant/profile/lib/logo/variant-colors.svg");
 
 const Home = () => {
   const [val, ref] = usePercentageInView<HTMLDivElement>();
