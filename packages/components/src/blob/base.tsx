@@ -2,14 +2,19 @@ import React, { useMemo } from "react";
 import { svgPath } from "blobs/v2";
 import { colors } from "@variant/profile";
 
+export type ImageProps = Omit<
+  JSX.IntrinsicElements["img"],
+  "height" | "width" | "style"
+>;
 export type BlobProps = {
   seed?: string;
   extraPoints?: number;
   randomness?: number;
   width: number;
   height: number;
-  imgSource?: string;
+  imageProps?: ImageProps;
   color?: colors.ColorPair;
+  svgTitle?: string;
 };
 
 export const BaseBlob: React.FC<BlobProps> = React.memo(
@@ -20,7 +25,8 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
     extraPoints = 4,
     randomness = 9,
     color = colors.colorPairs.primary.default,
-    imgSource,
+    imageProps,
+    svgTitle,
   }) => {
     const blobPath = useMemo(
       () =>
@@ -35,8 +41,9 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
       [seed, extraPoints, randomness, width, height]
     );
 
-    return !imgSource ? (
+    return !imageProps ? (
       <svg
+        xlinkTitle={svgTitle ?? ""}
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
@@ -48,10 +55,10 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
     ) : (
       <>
         <img
-          src={imgSource}
           height={height}
           width={width}
           style={{ clipPath: "url(#blobPath)" }}
+          {...imageProps}
         />
         <svg height={0} width={0}>
           <defs>

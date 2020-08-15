@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import ColorSection from "@variant/styleguide/color-grid";
 import TypographyInfo from "@variant/styleguide/typopgraphy-info";
 import BlobGenerator from "@variant/styleguide/blobs";
-import { BaseBlob, AnimatedBlob } from "@variant/components/blob";
+import { BaseBlob, AnimatedBlob, CSSAnimated } from "@variant/components/blob";
 import Head from "next/head";
 
 import css from "@variant/styleguide/pages/app.module.css";
@@ -72,7 +72,7 @@ const Home = () => {
           height={150}
           width={150}
           seed="Variant"
-          imgSource={"/logo-192.png"}
+          imageProps={{ src: "/logo-192.png", alt: "Variant Logo" }}
         />
         <pre>
           <code>
@@ -80,8 +80,8 @@ const Home = () => {
   height={150}
   width={150}
   seed="Variant"
-  imgSource="/logo-192.png"
-/>`}
+  imageProps={{ src: "/logo-192.png", alt: "Variant Logo" }}
+  />`}
           </code>
         </pre>
         <AnimatedBlob height={150} width={150} seed="Variant" />
@@ -94,7 +94,7 @@ const Home = () => {
           height={150}
           width={150}
           seed="Variant"
-          imgSource={"/logo-192.png"}
+          imageProps={{ src: "/logo-192.png", alt: "Variant Logo" }}
         />
         <pre>
           <code>

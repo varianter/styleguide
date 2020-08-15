@@ -18,7 +18,7 @@ export const AnimatedBlob: React.FC<AnimatedBlobProps> = memo(
     extraPoints = 4,
     randomness = 9,
     color = colors.colorPairs.primary.default.bg.toString(),
-    imgSource,
+    imageProps,
     ...rest
   }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -90,17 +90,17 @@ export const AnimatedBlob: React.FC<AnimatedBlobProps> = memo(
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
       ctx?.clearRect(0, 0, width, height);
-      if (imgSource) {
+      if (imageProps?.src) {
         const imgObj = new Image();
-        imgObj.src = imgSource;
+        imgObj.src = imageProps.src;
         imgObj.onload = () => {
           startAnimation(ctx as CanvasRenderingContext2D, imgObj);
         };
       } else if (ctx) {
-        ctx.fillStyle = color;
+        ctx.fillStyle = color.bg;
         startAnimation(ctx);
       }
-    }, [startAnimation, height, width, imgSource, color]);
+    }, [startAnimation, height, width, imageProps, color]);
 
     return <canvas ref={canvasRef} {...{ ...rest, height, width }} />;
   }
