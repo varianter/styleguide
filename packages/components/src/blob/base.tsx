@@ -14,7 +14,7 @@ export type BlobProps = {
   height: number;
   imageProps?: ImageProps;
   color?: colors.ValidColor;
-  svgTitle?: string;
+  alt?: string;
 };
 
 export const BaseBlob: React.FC<BlobProps> = React.memo(
@@ -26,7 +26,7 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
     randomness = 9,
     color = colors.colorPairs.primary.default.bg,
     imageProps,
-    svgTitle,
+    alt,
   }) => {
     const blobPath = useMemo(
       () =>
@@ -43,13 +43,13 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
 
     return !imageProps ? (
       <svg
-        xlinkTitle={svgTitle ?? ""}
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
+        {alt && <title>{alt}</title>}
         <path fill={color} d={blobPath} />
       </svg>
     ) : (
@@ -58,6 +58,7 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
           height={height}
           width={width}
           style={{ clipPath: "url(#blobPath)" }}
+          alt={alt}
           {...imageProps}
         />
         <svg height={0} width={0}>
