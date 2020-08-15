@@ -2,6 +2,7 @@ const withPlugins = require("next-compose-plugins");
 const withImages = require("next-images");
 const withTM = require("next-transpile-modules")([
   "@variant/profile",
+  "@variant/components",
   "@variant/styleguide",
   "../packages",
 ]);

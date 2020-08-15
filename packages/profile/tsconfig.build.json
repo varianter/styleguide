@@ -4,7 +4,7 @@
     "target": "es2015",
     "declaration": true,
     "outDir": "./dist",
-    "sourceMap": false
+    "sourceMap": true
   },
   "exclude": ["node_modules"],
   "include": ["src"]

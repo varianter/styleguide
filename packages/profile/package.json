@@ -9,7 +9,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "build": "tsc -p tsconfig.build.json && yarn css",
+    "build": "tsc -p tsconfig.build.json && yarn prepare",
     "copy:css": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' dist/",
     "copy:manifest": "copyfiles 'package.json' 'README.md' dist/",
     "prepare": "yarn copy:css && yarn copy:manifest"
