@@ -1,3 +1,13 @@
 {
-  "extends": "../../tsconfig.json"
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "declaration": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "jsx": "react"
+  },
+  "include": ["src", "global.d.ts"],
+  "exclude": ["node_modules"],
+  "references": [{ "path": "../profile/tsconfig.build.json" }]
 }

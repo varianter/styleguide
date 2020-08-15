@@ -18,6 +18,7 @@
   "scripts": {
     "clean": "lerna run clean",
     "pub": "lerna publish",
+    "bootstrap": "lerna bootstrap",
     "build-all": "lerna run build",
     "build": "yarn workspace @variant/styleguide-web build && cp -r ./web/public .",
     "dev": "yarn workspace @variant/styleguide-web dev"
