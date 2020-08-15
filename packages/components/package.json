@@ -1,6 +1,6 @@
 {
   "name": "@variant/components",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": false,
   "description": "Variant Styled Components",
   "author": "Mathias Flått <mf@variant.no>",
@@ -23,7 +23,7 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
-    "@variant/profile": "*",
+    "@variant/profile": "^2.0.1",
     "blobs": "^2.1.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
