@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ValidDefaultColor } from "@variant/profile/colors";
+import { ValidDefaultColor } from "@variant/profile/lib/colors";
 import { RefObject, useState, useEffect } from "react";
 import useDraggable from "./draggable";
 

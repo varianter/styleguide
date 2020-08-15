@@ -1,7 +1,6 @@
 import * as React from "react";
-
-import css from "./style.module.css";
 import useConfirmationText from "../use-confirmation-text";
+import css from "./style.module.css";
 
 export interface CopyableTextProps extends React.ComponentPropsWithoutRef<any> {
   children: string | number;

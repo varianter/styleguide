@@ -4,10 +4,10 @@ import colorScheme, {
   ColorSet,
   ColorSeries,
   ValidColor,
-} from "@variant/profile/colors";
+} from "@variant/profile/lib/colors";
 import css from "./color-grid.module.css";
 import { useState, useEffect } from "react";
-import CopyableText from "@variant/components/copyable-text";
+import CopyableText from "@variant/components/lib/copyable-text";
 
 const Series: React.FC<{
   series: ColorSeries;

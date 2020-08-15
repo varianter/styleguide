@@ -16,6 +16,8 @@
   },
   "dependencies": {},
   "scripts": {
+    "prepublishOnly": "yarn build-all",
+    "tsc": "lerna run tsc",
     "clean": "lerna run clean",
     "pub": "lerna publish",
     "bootstrap": "lerna bootstrap",

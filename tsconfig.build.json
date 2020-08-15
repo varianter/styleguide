@@ -28,14 +28,7 @@
     "noImplicitAny": true,
 
     "noEmit": false,
-
-    "baseUrl": ".",
-    "paths": {
-      "@variant/*": ["packages/*/src"],
-      "@variant/profile/*": ["packages/profile/src/*"],
-      "@variant/styleguide/*": ["packages/styleguide/src/*"],
-      "@variant/components/*": ["packages/components/src/*"]
-    }
+    "rootDir": "."
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

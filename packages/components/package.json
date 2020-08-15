@@ -7,12 +7,16 @@
   "license": "MIT",
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "lib",
+    "global.d.ts"
+  ],
   "scripts": {
+    "tsc": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "build": "tsc -p tsconfig.build.json && yarn prepare",
+    "build": "tsc -p tsconfig.build.json",
     "copy:css": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' dist/",
-    "copy:manifest": "copyfiles 'package.json' 'global.d.ts' 'README.md' dist/",
-    "prepare": "yarn copy:css && yarn copy:manifest"
+    "prepare": "yarn copy:css"
   },
   "devDependencies": {
     "copyfiles": "^2.3.0",
@@ -26,7 +30,6 @@
     "react-select": "^3.1.0"
   },
   "publishConfig": {
-    "access": "public",
-    "directory": "dist"
+    "access": "public"
   }
 }

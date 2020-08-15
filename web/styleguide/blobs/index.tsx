@@ -5,9 +5,9 @@ import {
   allColorRecords,
   randomColorRecord,
   allColors,
-} from "@variant/profile/colors";
+} from "@variant/profile/lib/colors";
 import css from "./blobs.module.css";
-import CopyableText from "@variant/components/copyable-text";
+import CopyableText from "@variant/components/lib/copyable-text";
 import SvgBlob, { SvgBlobProps } from "../components/svg-blob";
 import { useThrottle } from "@react-hook/throttle";
 import DownloadGroup from "./download-group";

@@ -3,11 +3,10 @@
   "compilerOptions": {
     "target": "es2015",
     "declaration": true,
-    "outDir": "./dist",
+    "outDir": "./lib",
     "sourceMap": true,
     "jsx": "react"
   },
   "include": ["src", "global.d.ts"],
-  "exclude": ["node_modules"],
-  "references": [{ "path": "../profile/tsconfig.build.json" }]
+  "exclude": ["node_modules", "lib"]
 }

@@ -1,10 +1,10 @@
 import { AnimatedBlob, BaseBlob } from "@variant/components/blob";
-import BlobGenerator from "@variant/styleguide/blobs";
-import ColorSection from "@variant/styleguide/color-grid";
-import css from "@variant/styleguide/pages/app.module.css";
-import TypographyInfo from "@variant/styleguide/typopgraphy-info";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
+import BlobGenerator from "styleguide/blobs";
+import ColorSection from "styleguide/color-grid";
+import css from "styleguide/pages/app.module.css";
+import TypographyInfo from "styleguide/typopgraphy-info";
 
 const favicon = require("@variant/profile/logo/favicon.png");
 const logoBw = require("@variant/profile/logo/variant-bw.svg");

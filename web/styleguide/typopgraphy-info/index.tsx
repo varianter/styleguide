@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import sizes from "@variant/profile/typography";
+import sizes from "@variant/profile/lib/typography";
 import css from "./typo.module.css";
 
 const BASE_SIZE = sizes.SIZE_BASE;

@@ -4,8 +4,8 @@
     "baseUrl": "..",
     "paths": {
       "@variant/*": ["packages/*/src"],
+      "styleguide/*": ["./web/styleguide/*"],
       "@variant/profile/*": ["packages/profile/src/*"],
-      "@variant/styleguide/*": ["packages/styleguide/src/*"],
       "@variant/components/*": ["packages/components/src/*"]
     },
     "module": "esnext",

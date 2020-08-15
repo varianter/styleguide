@@ -3,7 +3,8 @@
   "compilerOptions": {
     "module": "esnext",
     "jsx": "preserve",
-    "noEmit": true
+    "noEmit": true,
+    "rootDir": "."
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

@@ -9,16 +9,20 @@
   "devDependencies": {
     "@types/node": "^14.0.23",
     "@types/react": "^16.9.43",
+    "@types/react-select": "^3.0.17",
     "next-compose-plugins": "^2.2.0",
     "next-transpile-modules": "^3.3.0",
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@reach/slider": "^0.10.5",
+    "@react-hook/throttle": "^2.2.0",
     "framer-motion": "^2.3.0",
     "next": "^9.4.4",
     "next-images": "^1.4.0",
     "react": "16.13.0",
-    "react-dom": "16.13.0"
+    "react-dom": "16.13.0",
+    "react-select": "^3.1.0"
   },
   "scripts": {
     "dev": "next dev",

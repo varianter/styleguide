@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useRef, memo } from "react";
-import { canvasPath as animCanvasPath } from "blobs/v2/animate";
-import { BlobProps } from "./base";
 import { colors } from "@variant/profile";
-import { useIsMountedRef } from "../utils/useMounted";
-import { useReducedMotion } from "framer-motion";
 import { BlobOptions } from "blobs/v2";
+import { canvasPath as animCanvasPath } from "blobs/v2/animate";
+import { useReducedMotion } from "framer-motion";
+import React, { memo, useCallback, useEffect, useRef } from "react";
+import { useIsMountedRef } from "../utils/useMounted";
+import { BlobProps } from "./base";
 
 type AnimatedBlobProps = BlobProps & {
   animationSpeed?: number;

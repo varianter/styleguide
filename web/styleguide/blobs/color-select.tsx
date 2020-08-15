@@ -1,5 +1,8 @@
 import * as React from "react";
-import { allColorRecords, randomColorRecord } from "@variant/profile/colors";
+import {
+  allColorRecords,
+  randomColorRecord,
+} from "@variant/profile/lib/colors";
 import Select, { Styles } from "react-select";
 import css from "./blobs.module.css";
 

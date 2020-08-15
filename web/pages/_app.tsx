@@ -1,7 +1,7 @@
-import { AppProps } from "next/app";
 import "@reach/slider/styles.css";
-import "@variant/styleguide/index.css";
+import { AppProps } from "next/app";
 import React from "react";
+import "styleguide/index.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
