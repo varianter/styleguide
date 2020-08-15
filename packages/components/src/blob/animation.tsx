@@ -17,7 +17,7 @@ export const AnimatedBlob: React.FC<AnimatedBlobProps> = memo(
     seed = Math.random(),
     extraPoints = 4,
     randomness = 9,
-    color = colors.colorPairs.primary.default.bg.toString(),
+    color = colors.colorPairs.primary.default.bg,
     imageProps,
     ...rest
   }) => {
@@ -97,7 +97,7 @@ export const AnimatedBlob: React.FC<AnimatedBlobProps> = memo(
           startAnimation(ctx as CanvasRenderingContext2D, imgObj);
         };
       } else if (ctx) {
-        ctx.fillStyle = color.bg;
+        ctx.fillStyle = color;
         startAnimation(ctx);
       }
     }, [startAnimation, height, width, imageProps, color]);

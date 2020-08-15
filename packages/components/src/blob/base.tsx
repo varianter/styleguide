@@ -13,7 +13,7 @@ export type BlobProps = {
   width: number;
   height: number;
   imageProps?: ImageProps;
-  color?: colors.ColorPair;
+  color?: colors.ValidColor;
   svgTitle?: string;
 };
 
@@ -24,7 +24,7 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
     seed = Math.random(),
     extraPoints = 4,
     randomness = 9,
-    color = colors.colorPairs.primary.default,
+    color = colors.colorPairs.primary.default.bg,
     imageProps,
     svgTitle,
   }) => {
@@ -50,7 +50,7 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
-        <path fill={color.bg} d={blobPath} />
+        <path fill={color} d={blobPath} />
       </svg>
     ) : (
       <>
