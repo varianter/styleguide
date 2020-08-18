@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { svgPath } from "blobs/v2";
-import { colors } from "@variant/profile";
+import { colors } from "@variant/profile/lib";
 
 export type ImageProps = Omit<
   JSX.IntrinsicElements["img"],
@@ -28,6 +28,10 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
     imageProps,
     alt,
   }) => {
+    const blobID = useMemo(
+      () => genHashString(seed, extraPoints, randomness, width, height),
+      [seed, extraPoints, randomness, width, height]
+    );
     const blobPath = useMemo(
       () =>
         // Could store in session for more persistent "randomness" on blobstyle
@@ -57,13 +61,13 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
         <img
           height={height}
           width={width}
-          style={{ clipPath: "url(#blobPath)" }}
+          style={{ clipPath: `url(#${blobID})` }}
           alt={alt}
           {...imageProps}
         />
         <svg height={0} width={0}>
           <defs>
-            <clipPath id="blobPath">
+            <clipPath id={blobID}>
               <path d={blobPath}></path>
             </clipPath>
           </defs>
@@ -72,3 +76,17 @@ export const BaseBlob: React.FC<BlobProps> = React.memo(
     );
   }
 );
+
+// Could be unstable when string is large
+const genHashString = (...args: any[]): string => {
+  const baseString = args.map((a) => a.toString()).join("-");
+  let hash = 0,
+    i,
+    chr;
+  for (i = 0; i < baseString.length; i++) {
+    chr = baseString.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash.toString();
+};

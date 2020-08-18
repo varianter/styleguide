@@ -1,4 +1,4 @@
-import { colors } from "@variant/profile";
+import { colors } from "@variant/profile/lib";
 import { BlobOptions } from "blobs/v2";
 import { canvasPath as animCanvasPath } from "blobs/v2/animate";
 import { useReducedMotion } from "framer-motion";
