@@ -223,15 +223,15 @@ export const colorPairs: {
       },
       {
         bg: "#736EBE",
-        text: standardColors.black,
+        text: standardColors.white,
       },
       {
         bg: "#9591CE",
-        text: standardColors.black,
+        text: "#333333",
       },
       {
         bg: "#B7B4DE",
-        text: standardColors.black,
+        text: "#333333",
       },
     ],
     shade: [

@@ -64,7 +64,7 @@
 
   --color-secondary1--text: var(--color-standard__white);
   --color-secondary1__tint1--text: var(--color-standard__white);
-  --color-secondary1__tint2--text: var(--color-standard__black);
+  --color-secondary1__tint2--text: var(--color-standard__white);
   --color-secondary1__tint3--text: var(--color-standard__black);
   --color-secondary1__tint4--text: var(--color-standard__black);
   --color-secondary1__shade1--text: var(--color-standard__white);
