@@ -188,11 +188,11 @@ const Input: React.FC<{
   step?: number;
 }> = ({ onInput, min, max, val, step = 1 }) => {
   return (
-    <SliderInput
+    <SliderInput<number>
       min={min}
       max={max}
       step={step}
-      onChange={(v) => onInput(v)}
+      onChange={(v: number) => onInput(v)}
       value={val}
       style={{
         paddingTop: "1rem",
