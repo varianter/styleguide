@@ -7,8 +7,6 @@ import css from "styleguide/pages/app.module.css";
 import TypographyInfo from "styleguide/typopgraphy-info";
 
 const favicon = require("@variant/profile/lib/logo/favicon.png");
-const logoBw = require("@variant/profile/lib/logo/variant-bw.svg");
-const logoColors = require("@variant/profile/lib/logo/variant-colors.svg");
 
 const Home = () => {
   const [val, ref] = usePercentageInView<HTMLDivElement>();
@@ -28,8 +26,8 @@ const Home = () => {
         <h2>Logo</h2>
 
         <div className={css.logoSection}>
-          <img src={logoBw} alt="Variant" />
-          <img src={logoColors} alt="Variant" />
+          <img src="/variant-bw.svg" alt="Variant" />
+          <img src="/variant-colors.svg" alt="Variant" />
         </div>
 
         <p>
