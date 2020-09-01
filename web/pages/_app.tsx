@@ -14,3 +14,20 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+// Remove old and outdated service workers.
+// This should be removed at some point (when enough time has passed)
+if (
+  typeof window !== "undefined" &&
+  typeof navigator !== "undefined" &&
+  "serviceWorker" in navigator
+) {
+  window.addEventListener("load", async function () {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    if (!registrations || !registrations.length) return;
+    for (let registration of registrations) {
+      await registration.unregister();
+    }
+    window.location.reload();
+  });
+}
