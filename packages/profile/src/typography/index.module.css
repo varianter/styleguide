@@ -18,24 +18,31 @@
  * © 2019 MyFonts Inc
 */
 
+
 @font-face {
-  font-family: "Recoleta-Regular";
+  /* Regular */
+  font-family: "Recoleta";
   src: url("./fonts/recoleta/3A95AC_6_0.eot");
   src: url("./fonts/recoleta/3A95AC_6_0.eot?#iefix") format("embedded-opentype"),
     url("./fonts/recoleta/3A95AC_6_0.woff2") format("woff2"),
     url("./fonts/recoleta/3A95AC_6_0.woff") format("woff"),
     url("./fonts/recoleta/3A95AC_6_0.ttf") format("truetype");
+  font-style: normal;
   font-display: swap;
+  font-weight: 400;
 }
 
 @font-face {
-  font-family: "Recoleta-Medium";
+  /* Medium */
+  font-family: "Recoleta";
   src: url("./fonts/recoleta/3A95AC_3_0.eot");
   src: url("./fonts/recoleta/3A95AC_3_0.eot?#iefix") format("embedded-opentype"),
     url("./fonts/recoleta/3A95AC_3_0.woff2") format("woff2"),
     url("./fonts/recoleta/3A95AC_3_0.woff") format("woff"),
     url("./fonts/recoleta/3A95AC_3_0.ttf") format("truetype");
+  font-style: normal;
   font-display: swap;
+  font-weight: 500;
 }
 
 /*
@@ -115,10 +122,10 @@ h3,
 h4,
 h5 {
   margin: 0;
+  font-family: "Recoleta", serif;
 }
 
 h1 {
-  font-family: "Recoleta-Medium", serif;
   line-height: 1.2;
   font-weight: 500;
   font-size: 5.05rem;
@@ -126,10 +133,11 @@ h1 {
 
 h2 {
   line-height: 1.2;
-  font-family: "Recoleta-Regular", serif;
+  font-weight: 400;
   font-weight: normal;
   font-size: 3.4rem;
 }
+
 * + h2 {
   margin-top: 3.4rem;
 }
@@ -139,12 +147,15 @@ h3 {
   font-family: "Graphik Web", Arial, sans-serif;
   font-weight: normal;
 }
+
 h3.fancy {
-  font-family: "Recoleta-Regular", serif;
+  font-family: "Recoleta", serif;
 }
+
 h3 {
   font-size: 2.25rem;
 }
+
 * + h3 {
   margin-top: 2.25rem;
 }
@@ -156,7 +167,7 @@ h4 {
   margin-bottom: 0.5rem;
 }
 h4.fancy {
-  font-family: "Recoleta-Medium", serif;
+  font-family: "Recoleta", serif;
 }
 * + h4 {
   margin-top: 3rem;
