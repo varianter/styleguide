@@ -29,6 +29,7 @@
   "dependencies": {
     "@variant/profile": "^2.0.5",
     "blobs": "^2.1.0",
+    "framer-motion": "^2.6.6",
     "react-select": "^3.1.0"
   },
   "publishConfig": {
