@@ -96,24 +96,28 @@
   font-display: swap;
 }
 
-html {
-  font-size: 20px;
-}
-@media (max-width: 1000px) {
-  html {
-    font-size: 16px;
-  }
-}
-@media (max-width: 800px) {
-  html {
-    font-size: 14px;
-  }
-}
+
+
 body {
   font-family: "Graphik Web", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-standard__black);
+}
+
+html {
+  --font-size-min: 14;
+  --font-size-max: 20;
+  --viewport-min: 350;
+  --viewport-max: 1400;
+  font-size: calc( (var(--font-size-min) * 1px) + (var(--font-size-max) - var(--font-size-min)) * ((100vw - (var(--viewport-min) * 1px)) / (var(--viewport-max) - var(--viewport-min))) );
+  line-height: 1.6;
+}
+
+@media (min-width: 1400px) {
+  html {
+    font-size: calc( var(--font-size-max) * 1px );
+  }
 }
 
 h1,
