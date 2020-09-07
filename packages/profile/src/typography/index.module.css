@@ -148,7 +148,7 @@ h3 {
   font-weight: normal;
 }
 
-h3.fancy {
+.fancy {
   font-family: "Recoleta", serif;
 }
 
@@ -165,9 +165,6 @@ h4 {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
-}
-h4.fancy {
-  font-family: "Recoleta", serif;
 }
 * + h4 {
   margin-top: 3rem;
