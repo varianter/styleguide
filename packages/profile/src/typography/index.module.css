@@ -188,11 +188,11 @@ p {
 p + p {
   margin-top: 1rem;
 }
-p.lead {
+.lead {
   font-size: 1.5rem;
   line-height: 1.3;
 }
-p.caption {
+.caption {
   font-size: 0.65rem;
   line-height: 1.4;
 }
