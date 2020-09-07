@@ -204,5 +204,5 @@ button,
 input,
 textarea {
   font-family: "Graphik Web", Arial, sans-serif;
-  font-size: 1rem;
+  font-size: inherit;
 }
