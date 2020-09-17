@@ -107,18 +107,18 @@ body {
 
 html {
   --font-size-min: 14;
-  --font-size-max: 20;
-  --viewport-min: 350;
+  --font-size-max: 22;
+  --viewport-min: 400;
   --viewport-max: 1400;
   font-size: calc( (var(--font-size-min) * 1px) + (var(--font-size-max) - var(--font-size-min)) * ((100vw - (var(--viewport-min) * 1px)) / (var(--viewport-max) - var(--viewport-min))) );
   line-height: 1.6;
 }
 
-@media (min-width: 1400px) {
+/* @media (min-width: 1400px) {
   html {
     font-size: calc( var(--font-size-max) * 1px );
   }
-}
+} */
 
 h1,
 h2,
