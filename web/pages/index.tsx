@@ -1,4 +1,5 @@
 import { AnimatedBlob, BaseBlob } from "@variant/components/lib/blob";
+import { CopyableButton } from "@variant/components/lib/copyable";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import BlobGenerator from "styleguide/blobs";
@@ -105,6 +106,10 @@ const Home = () => {
 />`}
           </code>
         </pre>
+        <CopyableButton
+          copyValue="Dette er en test, copy funker fint"
+          buttonText="Kopier test tekst"
+        />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import colorScheme, {
 } from "@variant/profile/lib/colors";
 import css from "./color-grid.module.css";
 import { useState, useEffect } from "react";
-import CopyableText from "@variant/components/lib/copyable-text";
+import { CopyableText } from "@variant/components/lib/copyable";
 
 const Series: React.FC<{
   series: ColorSeries;
