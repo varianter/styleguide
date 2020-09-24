@@ -96,24 +96,24 @@
   font-display: swap;
 }
 
-html {
-  font-size: 20px;
-}
-@media (max-width: 1000px) {
-  html {
-    font-size: 16px;
-  }
-}
-@media (max-width: 800px) {
-  html {
-    font-size: 14px;
-  }
-}
+
+
 body {
   font-family: "Graphik Web", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-standard__black);
+}
+
+html {
+  --font-size-min: 14;
+  --font-size-max: 22;
+  --viewport-min: 400;
+  --viewport-max: 1400;
+  line-height: 1.6;
+  /* Explanation for this madness: https://css-tricks.com/snippets/css/fluid-typography/ */
+  font-size: calc( (var(--font-size-min) * 1px) + (var(--font-size-max) - var(--font-size-min)) * ((100vw - (var(--viewport-min) * 1px)) / (var(--viewport-max) - var(--viewport-min))) );
+  
 }
 
 h1,
@@ -148,7 +148,7 @@ h3 {
   font-weight: normal;
 }
 
-h3.fancy {
+.fancy {
   font-family: "Recoleta", serif;
 }
 
@@ -165,9 +165,6 @@ h4 {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
-}
-h4.fancy {
-  font-family: "Recoleta", serif;
 }
 * + h4 {
   margin-top: 3rem;
@@ -191,11 +188,11 @@ p {
 p + p {
   margin-top: 1rem;
 }
-p.lead {
+.lead {
   font-size: 1.5rem;
   line-height: 1.3;
 }
-p.caption {
+.caption {
   font-size: 0.65rem;
   line-height: 1.4;
 }
@@ -204,5 +201,5 @@ button,
 input,
 textarea {
   font-family: "Graphik Web", Arial, sans-serif;
-  font-size: 1rem;
+  font-size: inherit;
 }
