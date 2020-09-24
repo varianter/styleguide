@@ -32,7 +32,7 @@ const Home = () => {
 
         <p>
           For the color version you are encouraged to make your own twist with
-          cliped illustration. Make sure to check the contrast where you use it.
+          clipped illustration. Make sure to check the contrast where you use it.
         </p>
       </div>
 
