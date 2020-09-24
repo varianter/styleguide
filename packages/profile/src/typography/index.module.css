@@ -110,15 +110,11 @@ html {
   --font-size-max: 22;
   --viewport-min: 400;
   --viewport-max: 1400;
-  font-size: calc( (var(--font-size-min) * 1px) + (var(--font-size-max) - var(--font-size-min)) * ((100vw - (var(--viewport-min) * 1px)) / (var(--viewport-max) - var(--viewport-min))) );
   line-height: 1.6;
+  /* Explanation for this madness: https://css-tricks.com/snippets/css/fluid-typography/ */
+  font-size: calc( (var(--font-size-min) * 1px) + (var(--font-size-max) - var(--font-size-min)) * ((100vw - (var(--viewport-min) * 1px)) / (var(--viewport-max) - var(--viewport-min))) );
+  
 }
-
-/* @media (min-width: 1400px) {
-  html {
-    font-size: calc( var(--font-size-max) * 1px );
-  }
-} */
 
 h1,
 h2,
