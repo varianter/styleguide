@@ -188,7 +188,7 @@ const Input: React.FC<{
   step?: number;
 }> = ({ onInput, min, max, val, step = 1 }) => {
   return (
-    <SliderInput<number>
+    <SliderInput
       min={min}
       max={max}
       step={step}
