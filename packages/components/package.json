@@ -19,17 +19,17 @@
     "copy:css": "copyfiles -u 1 'src/**/*.{css,woff,woff2,ttf,eot,svg,png}' lib/"
   },
   "devDependencies": {
-    "copyfiles": "^2.3.0",
-    "typescript": "^3.9.5"
+    "copyfiles": "^2.4.0",
+    "typescript": "^4.0.3"
   },
   "peerDependencies": {
-    "react": "^16.10.0",
-    "react-dom": "^16.10.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "dependencies": {
     "@variant/profile": "^2.0.5",
     "blobs": "^2.1.0",
-    "framer-motion": "^2.6.6",
+    "framer-motion": "^2.8.0",
     "react-select": "^3.1.0"
   },
   "publishConfig": {
