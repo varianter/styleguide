@@ -1,0 +1,7 @@
+.copyable:active {
+  opacity: 0.7;
+}
+
+.copyable:hover {
+  cursor: pointer;
+}

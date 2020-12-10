@@ -7,7 +7,7 @@ import {
   allColors,
 } from "@variant/profile/lib/colors";
 import css from "./blobs.module.css";
-import CopyableText from "@variant/components/lib/copyable-text";
+import { CopyableButton, CopyableText } from "@variant/components/lib/copyable";
 import SvgBlob, { SvgBlobProps } from "../components/svg-blob";
 import { useThrottle } from "@react-hook/throttle";
 import DownloadGroup from "./download-group";
@@ -119,13 +119,11 @@ const BlobGenerator: React.FC<{}> = () => {
             <button className={css.smallButton} onClick={reshape} type="button">
               Random Seed
             </button>
-            <CopyableText
-              Component="button"
+            <CopyableButton
               className={css.smallButton}
-              overrideCopyValue={seed}
-            >
-              Copy seed
-            </CopyableText>
+              copyValue={String(seed)}
+              buttonText="Copy seed"
+            />
           </div>
 
           {!image && (
