@@ -12,3 +12,13 @@ To release new versions do:
 yarn build-all
 yarn pub
 ```
+
+## Running locally
+
+From root:
+
+```
+yarn dev
+```
+
+This runs the `web/` workspace project.
