@@ -1,6 +1,6 @@
 {
   "name": "@variant/prettier-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "Variant common prettier config",
   "main": "index.json",
