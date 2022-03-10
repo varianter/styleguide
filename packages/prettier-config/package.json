@@ -1,8 +1,10 @@
 {
   "name": "@variant/prettier-config",
   "version": "1.0.1",
+  "private": false,
   "description": "Variant common prettier config",
   "main": "index.json",
   "author": "Mikael Brevik <mb@variant.no>",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "2235d4394e85a8d415d0498f7bbc4bcbde815369"
 }
