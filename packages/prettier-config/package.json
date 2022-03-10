@@ -1,6 +1,6 @@
 {
   "name": "@variant/prettier-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Variant common prettier config",
   "main": "index.json",
   "author": "Mikael Brevik <mb@variant.no>",
