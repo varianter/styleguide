@@ -32,6 +32,9 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
     const { position: translation, drag } = useDraggable({
       onDragEnd: imagePositionChanged,
     });
+    const [imageDimensions, setImageDimensions] = useState<{height: number; width: number}>({height: 100, width: 100});
+    const [scaleHeight, setScaleHeight] = useState<number>(imageScale);
+    const [scaleWidth, setScaleWidth] = useState<number>(imageScale);
 
     useEffect(
       function () {
@@ -44,6 +47,25 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
       },
       [image]
     );
+
+    useEffect( () => {
+      if (imageDimensions){
+        const [h, w] = [imageDimensions.height, imageDimensions.width];
+        setScaleHeight(h > w ? h/w*imageScale : imageScale);
+        setScaleWidth(w > h ? w/h*imageScale : imageScale);
+      }},
+      [imageScale, imageDimensions]
+    );
+
+    useEffect(() => {
+      if(imageString){
+        let img = new Image();
+        img.src = imageString;
+        img.onload = () => {
+          setImageDimensions({height: img.height, width: img.width})
+        }
+      }
+    }, [imageString])
 
     return (
       <svg
@@ -75,11 +97,11 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
             <image
               onMouseDown={drag}
               clipPath="url(#mask)"
-              height={`${imageScale}%`}
-              width={`${imageScale}%`}
+              height={`${scaleHeight}%`}
+              width={`${scaleWidth}%`}
               x={translation.x}
               y={translation.y}
-              preserveAspectRatio="xMinYMin slice"
+              preserveAspectRatio="xMidYMid"
               xlinkHref={imageString}
               style={{ cursor: "move" }}
             />
