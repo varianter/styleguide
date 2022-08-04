@@ -1,13 +1,13 @@
-import * as React from "react";
-import { ValidDefaultColor } from "@variant/profile/lib/colors";
-import { RefObject, useState, useEffect } from "react";
-import useDraggable from "./draggable";
+import * as React from 'react';
+import { ValidDefaultColor } from '@variant/profile/lib/colors';
+import { RefObject, useState, useEffect } from 'react';
+import useDraggable from './draggable';
 
 export type SvgBlobProps = {
   path: string;
   color: string;
   size?: number;
-  stroke?: ValidDefaultColor | "none";
+  stroke?: ValidDefaultColor | 'none';
   strokeWidth?: number;
   svgRef?: RefObject<SVGSVGElement> | null;
   image?: File;
@@ -21,7 +21,7 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
     path,
     color,
     size = 100,
-    stroke = "none",
+    stroke = 'none',
     strokeWidth = 0,
     svgRef,
     image,
@@ -32,7 +32,10 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
     const { position: translation, drag } = useDraggable({
       onDragEnd: imagePositionChanged,
     });
-    const [imageDimensions, setImageDimensions] = useState<{height: number; width: number}>({height: 100, width: 100});
+    const [imageDimensions, setImageDimensions] = useState<{
+      height: number;
+      width: number;
+    }>({ height: 100, width: 100 });
     const [scaleHeight, setScaleHeight] = useState<number>(imageScale);
     const [scaleWidth, setScaleWidth] = useState<number>(imageScale);
 
@@ -40,33 +43,33 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
       function () {
         if (!image) return setImageString(undefined);
         const reader = new FileReader();
-        reader.addEventListener("load", () =>
-          setImageString(String(reader.result))
+        reader.addEventListener('load', () =>
+          setImageString(String(reader.result)),
         );
         reader.readAsDataURL(image);
       },
-      [image]
-    );
-
-    useEffect( () => {
-      if (imageDimensions){
-        const [h, w] = [imageDimensions.height, imageDimensions.width];
-        setScaleHeight(h > w ? h/w*imageScale : imageScale);
-        setScaleWidth(w > h ? w/h*imageScale : imageScale);
-      }},
-      [imageScale, imageDimensions]
+      [image],
     );
 
     useEffect(() => {
-      if(imageString){
-        let img = new Image();
-        img.src = imageString;
+      const scaleDimensions = calculateScaleFromDimensions(
+        imageDimensions,
+        imageScale,
+      );
+      setScaleHeight(scaleDimensions.height);
+      setScaleWidth(scaleDimensions.width);
+    }, [imageScale, imageDimensions]);
+
+    useEffect(() => {
+      if (imageString) {
+        const img = new Image();
+        img.src = String(imageString);
         img.onload = () => {
-          setImageDimensions({height: img.height, width: img.width})
-          img.remove()
-        }
+          setImageDimensions({ height: img.height, width: img.width });
+          img.remove();
+        };
       }
-    }, [imageString])
+    }, [imageString]);
 
     return (
       <svg
@@ -102,17 +105,27 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
               width={`${scaleWidth}%`}
               x={translation.x}
               y={translation.y}
-              preserveAspectRatio="xMidYMid"
+              preserveAspectRatio="xMinYMin slice"
               xlinkHref={imageString}
-              style={{ cursor: "move" }}
+              style={{ cursor: 'move' }}
             />
           </>
         )}
       </svg>
     );
-  }
+  },
 );
 export default SvgBlob;
+
+const calculateScaleFromDimensions = (
+  dimensions: { height: number; width: number },
+  generalScale: number,
+) => {
+  const [h, w] = [dimensions.height, dimensions.width];
+  const scaleHeight = h > w ? (h / w) * generalScale : generalScale;
+  const scaleWidth = w > h ? (w / h) * generalScale : generalScale;
+  return { height: scaleHeight, width: scaleWidth };
+};
 
 export async function blobAsString(opts: SvgBlobProps) {
   if (opts.image) {
@@ -125,7 +138,7 @@ function blobWithoutImageString({
   path,
   color,
   size = 100,
-  stroke = "none",
+  stroke = 'none',
   strokeWidth = 0,
 }: SvgBlobProps) {
   return `
@@ -145,18 +158,33 @@ async function blobImageAsString({
   path,
   color,
   size = 100,
-  stroke = "none",
+  stroke = 'none',
   strokeWidth = 0,
   image,
   imageScale = 100,
   imagePosition = { x: 0, y: 0 },
 }: SvgBlobProps) {
   const imageString = await new Promise(function (res) {
-    if (!image) return res("");
+    if (!image) return res('');
     const reader = new FileReader();
-    reader.addEventListener("load", () => res(String(reader.result)));
+    reader.addEventListener('load', () => res(String(reader.result)));
     reader.readAsDataURL(image);
   });
+
+  const imageDimensions: { height: number; width: number } = await new Promise(
+    (res) => {
+      let img = new Image();
+      img.src = String(imageString);
+      img.onload = () => {
+        res({ height: img.height, width: img.width });
+        img.remove();
+      };
+    },
+  );
+  const scaleDimensions = calculateScaleFromDimensions(
+    imageDimensions,
+    imageScale,
+  );
 
   return `
     <svg
@@ -171,8 +199,8 @@ async function blobImageAsString({
       </clipPath>
       <image
         clip-path="url(#mask)"
-        height="${imageScale}%"
-        width="${imageScale}%"
+        height="${scaleDimensions.height}%"
+        width="${scaleDimensions.width}%"
         x="${imagePosition.x}"
         y="${imagePosition.y}"
         preserveAspectRatio="xMinYMin slice"
