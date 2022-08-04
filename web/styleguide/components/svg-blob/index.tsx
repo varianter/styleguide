@@ -63,6 +63,7 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
         img.src = imageString;
         img.onload = () => {
           setImageDimensions({height: img.height, width: img.width})
+          img.remove()
         }
       }
     }, [imageString])
