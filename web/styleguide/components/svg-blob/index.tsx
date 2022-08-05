@@ -117,16 +117,6 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
 );
 export default SvgBlob;
 
-const calculateScaleFromDimensions = (
-  dimensions: { height: number; width: number },
-  generalScale: number,
-) => {
-  const [h, w] = [dimensions.height, dimensions.width];
-  const scaleHeight = h > w ? (h / w) * generalScale : generalScale;
-  const scaleWidth = w > h ? (w / h) * generalScale : generalScale;
-  return { height: scaleHeight, width: scaleWidth };
-};
-
 export async function blobAsString(opts: SvgBlobProps) {
   if (opts.image) {
     return blobImageAsString(opts);
@@ -209,3 +199,13 @@ async function blobImageAsString({
     </svg>
 `;
 }
+
+const calculateScaleFromDimensions = (
+  dimensions: { height: number; width: number },
+  generalScale: number,
+) => {
+  const { height: h, width: w } = dimensions;
+  const scaleHeight = h > w ? (h / w) * generalScale : generalScale;
+  const scaleWidth = w > h ? (w / h) * generalScale : generalScale;
+  return { height: scaleHeight, width: scaleWidth };
+};
