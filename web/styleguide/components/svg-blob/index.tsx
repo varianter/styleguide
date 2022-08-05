@@ -28,48 +28,11 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
     imageScale = 100,
     imagePositionChanged = () => {},
   }) => {
-    const [imageString, setImageString] = useState<string>();
     const { position: translation, drag } = useDraggable({
       onDragEnd: imagePositionChanged,
     });
-    const [imageDimensions, setImageDimensions] = useState<{
-      height: number;
-      width: number;
-    }>({ height: 100, width: 100 });
-    const [scaleHeight, setScaleHeight] = useState<number>(imageScale);
-    const [scaleWidth, setScaleWidth] = useState<number>(imageScale);
 
-    useEffect(
-      function () {
-        if (!image) return setImageString(undefined);
-        const reader = new FileReader();
-        reader.addEventListener('load', () =>
-          setImageString(String(reader.result)),
-        );
-        reader.readAsDataURL(image);
-      },
-      [image],
-    );
-
-    useEffect(() => {
-      const scaleDimensions = calculateScaleFromDimensions(
-        imageDimensions,
-        imageScale,
-      );
-      setScaleHeight(scaleDimensions.height);
-      setScaleWidth(scaleDimensions.width);
-    }, [imageScale, imageDimensions]);
-
-    useEffect(() => {
-      if (imageString) {
-        const img = new Image();
-        img.src = String(imageString);
-        img.onload = () => {
-          setImageDimensions({ height: img.height, width: img.width });
-          img.remove();
-        };
-      }
-    }, [imageString]);
+    const { imageString, scaleDimensions } = useImageData(image);
 
     return (
       <svg
@@ -101,8 +64,8 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
             <image
               onMouseDown={drag}
               clipPath="url(#mask)"
-              height={`${scaleHeight}%`}
-              width={`${scaleWidth}%`}
+              height={`${scaleDimensions.height * imageScale}%`}
+              width={`${scaleDimensions.width * imageScale}%`}
               x={translation.x}
               y={translation.y}
               preserveAspectRatio="xMinYMin slice"
@@ -171,10 +134,8 @@ async function blobImageAsString({
       };
     },
   );
-  const scaleDimensions = calculateScaleFromDimensions(
-    imageDimensions,
-    imageScale,
-  );
+
+  const scaleDimensions = calculateScaleFromDimensions(imageDimensions);
 
   return `
     <svg
@@ -189,8 +150,8 @@ async function blobImageAsString({
       </clipPath>
       <image
         clip-path="url(#mask)"
-        height="${scaleDimensions.height}%"
-        width="${scaleDimensions.width}%"
+        height="${scaleDimensions.height * imageScale}%"
+        width="${scaleDimensions.width * imageScale}%"
         x="${imagePosition.x}"
         y="${imagePosition.y}"
         preserveAspectRatio="xMinYMin slice"
@@ -200,12 +161,50 @@ async function blobImageAsString({
 `;
 }
 
-const calculateScaleFromDimensions = (
-  dimensions: { height: number; width: number },
-  generalScale: number,
-) => {
+function useImageData(image: File | undefined) {
+  const [imageString, setImageString] = useState<string>();
+  const [scaleDimensions, setScaleDimensions] = useState({
+    height: 1,
+    width: 1,
+  });
+
+  useEffect(
+    function () {
+      if (!image) return setImageString(undefined);
+      const reader = new FileReader();
+      reader.addEventListener('load', () =>
+        setImageString(String(reader.result)),
+      );
+      reader.readAsDataURL(image);
+    },
+    [image],
+  );
+  useEffect(() => {
+    if (imageString) {
+      const img = new Image();
+      img.src = String(imageString);
+      img.onload = () => {
+        setScaleDimensions(
+          calculateScaleFromDimensions({
+            height: img.height,
+            width: img.width,
+          }),
+        );
+        img.remove();
+      };
+    }
+  }, [imageString]);
+
+  return {
+    imageString,
+    scaleDimensions,
+  };
+}
+
+function calculateScaleFromDimensions(dimensions: {
+  height: number;
+  width: number;
+}) {
   const { height: h, width: w } = dimensions;
-  const scaleHeight = h > w ? (h / w) * generalScale : generalScale;
-  const scaleWidth = w > h ? (w / h) * generalScale : generalScale;
-  return { height: scaleHeight, width: scaleWidth };
-};
+  return { height: h > w ? h / w : 1, width: w > h ? w / h : 1 };
+}
