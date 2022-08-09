@@ -1,13 +1,13 @@
-import * as React from "react";
-import { ValidDefaultColor } from "@variant/profile/lib/colors";
-import { RefObject, useState, useEffect } from "react";
-import useDraggable from "./draggable";
+import * as React from 'react';
+import { ValidDefaultColor } from '@variant/profile/lib/colors';
+import { RefObject, useState, useEffect } from 'react';
+import useDraggable from './draggable';
 
 export type SvgBlobProps = {
   path: string;
   color: string;
   size?: number;
-  stroke?: ValidDefaultColor | "none";
+  stroke?: ValidDefaultColor | 'none';
   strokeWidth?: number;
   svgRef?: RefObject<SVGSVGElement> | null;
   image?: File;
@@ -21,29 +21,18 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
     path,
     color,
     size = 100,
-    stroke = "none",
+    stroke = 'none',
     strokeWidth = 0,
     svgRef,
     image,
     imageScale = 100,
     imagePositionChanged = () => {},
   }) => {
-    const [imageString, setImageString] = useState<string>();
     const { position: translation, drag } = useDraggable({
       onDragEnd: imagePositionChanged,
     });
 
-    useEffect(
-      function () {
-        if (!image) return setImageString(undefined);
-        const reader = new FileReader();
-        reader.addEventListener("load", () =>
-          setImageString(String(reader.result))
-        );
-        reader.readAsDataURL(image);
-      },
-      [image]
-    );
+    const { imageString, scaleDimensions } = useImageData(image);
 
     return (
       <svg
@@ -75,19 +64,19 @@ const SvgBlob: React.FC<SvgBlobProps> = React.memo(
             <image
               onMouseDown={drag}
               clipPath="url(#mask)"
-              height={`${imageScale}%`}
-              width={`${imageScale}%`}
+              height={`${scaleDimensions.height * imageScale}%`}
+              width={`${scaleDimensions.width * imageScale}%`}
               x={translation.x}
               y={translation.y}
               preserveAspectRatio="xMinYMin slice"
               xlinkHref={imageString}
-              style={{ cursor: "move" }}
+              style={{ cursor: 'move' }}
             />
           </>
         )}
       </svg>
     );
-  }
+  },
 );
 export default SvgBlob;
 
@@ -102,7 +91,7 @@ function blobWithoutImageString({
   path,
   color,
   size = 100,
-  stroke = "none",
+  stroke = 'none',
   strokeWidth = 0,
 }: SvgBlobProps) {
   return `
@@ -122,18 +111,31 @@ async function blobImageAsString({
   path,
   color,
   size = 100,
-  stroke = "none",
+  stroke = 'none',
   strokeWidth = 0,
   image,
   imageScale = 100,
   imagePosition = { x: 0, y: 0 },
 }: SvgBlobProps) {
   const imageString = await new Promise(function (res) {
-    if (!image) return res("");
+    if (!image) return res('');
     const reader = new FileReader();
-    reader.addEventListener("load", () => res(String(reader.result)));
+    reader.addEventListener('load', () => res(String(reader.result)));
     reader.readAsDataURL(image);
   });
+
+  const imageDimensions: { height: number; width: number } = await new Promise(
+    (res) => {
+      let img = new Image();
+      img.src = String(imageString);
+      img.onload = () => {
+        res({ height: img.height, width: img.width });
+        img.remove();
+      };
+    },
+  );
+
+  const scaleDimensions = calculateScaleFromDimensions(imageDimensions);
 
   return `
     <svg
@@ -148,8 +150,8 @@ async function blobImageAsString({
       </clipPath>
       <image
         clip-path="url(#mask)"
-        height="${imageScale}%"
-        width="${imageScale}%"
+        height="${scaleDimensions.height * imageScale}%"
+        width="${scaleDimensions.width * imageScale}%"
         x="${imagePosition.x}"
         y="${imagePosition.y}"
         preserveAspectRatio="xMinYMin slice"
@@ -157,4 +159,52 @@ async function blobImageAsString({
       />
     </svg>
 `;
+}
+
+function useImageData(image: File | undefined) {
+  const [imageString, setImageString] = useState<string>();
+  const [scaleDimensions, setScaleDimensions] = useState({
+    height: 1,
+    width: 1,
+  });
+
+  useEffect(
+    function () {
+      if (!image) return setImageString(undefined);
+      const reader = new FileReader();
+      reader.addEventListener('load', () =>
+        setImageString(String(reader.result)),
+      );
+      reader.readAsDataURL(image);
+    },
+    [image],
+  );
+  useEffect(() => {
+    if (imageString) {
+      const img = new Image();
+      img.src = String(imageString);
+      img.onload = () => {
+        setScaleDimensions(
+          calculateScaleFromDimensions({
+            height: img.height,
+            width: img.width,
+          }),
+        );
+        img.remove();
+      };
+    }
+  }, [imageString]);
+
+  return {
+    imageString,
+    scaleDimensions,
+  };
+}
+
+function calculateScaleFromDimensions(dimensions: {
+  height: number;
+  width: number;
+}) {
+  const { height: h, width: w } = dimensions;
+  return { height: h > w ? h / w : 1, width: w > h ? w / h : 1 };
 }
