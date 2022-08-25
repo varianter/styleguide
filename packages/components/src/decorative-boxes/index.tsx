@@ -20,6 +20,7 @@ export interface DecorativeBoxesProps
 /*
 Incomplete todo-list:
 TODO: Implement random default colors
+TODO: Implement optional photo text
 TODO: Investigate if it is easier/more consistent
  to just pass bottom/right as styling instead of 
  translating to top/left every time
