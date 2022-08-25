@@ -1,9 +1,9 @@
 .main-container {
   padding: 2rem;
-  background-color: red;
   position: relative;
   height: min-content;
   width: min-content;
+  line-height: 0;
 }
 
 .decorative-box {
@@ -16,7 +16,6 @@
 
 .child-container {
   position: relative;
-
   height: fit-content;
   width: fit-content;
 }
