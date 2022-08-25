@@ -1,21 +1,21 @@
-import { AnimatedBlob, BaseBlob } from "@variant/components/lib/blob";
-import Head from "next/head";
-import React, { useEffect, useRef, useState } from "react";
-import BlobGenerator from "styleguide/blobs";
-import ColorSection from "styleguide/color-grid";
-import css from "styleguide/pages/app.module.css";
-import TypographyInfo from "styleguide/typopgraphy-info";
+import { AnimatedBlob, BaseBlob } from '@variant/components/lib/blob';
+import Head from 'next/head';
+import React, { useEffect, useRef, useState } from 'react';
+import BlobGenerator from 'styleguide/blobs';
+import ColorSection from 'styleguide/color-grid';
+import css from 'styleguide/pages/app.module.css';
+import TypographyInfo from 'styleguide/typopgraphy-info';
 
-const favicon = require("@variant/profile/lib/logo/favicon.png");
+const favicon = require('@variant/profile/lib/logo/favicon.png');
 
 const Home = () => {
   const [val, ref] = usePercentageInView<HTMLDivElement>();
 
   return (
-    <div className={css.container} style={{ ["--bg-opacity" as any]: 1 - val }}>
+    <div className={css.container} style={{ ['--bg-opacity' as any]: 1 - val }}>
       <Head>
         <title>Styleguide – Variant</title>
-        <link rel="icon" href={favicon} />
+        <link rel='icon' href={favicon} />
       </Head>
 
       <div className={css.hero} ref={ref}>
@@ -26,13 +26,14 @@ const Home = () => {
         <h2>Logo</h2>
 
         <div className={css.logoSection}>
-          <img src="/variant-bw.svg" alt="Variant" />
-          <img src="/variant-colors.svg" alt="Variant" />
+          <img src='/variant-bw.svg' alt='Variant' />
+          <img src='/variant-colors.svg' alt='Variant' />
         </div>
 
         <p>
           For the color version you are encouraged to make your own twist with
-          clipped illustration. Make sure to check the contrast where you use it.
+          clipped illustration. Make sure to check the contrast where you use
+          it.
         </p>
       </div>
 
@@ -61,15 +62,15 @@ const Home = () => {
           above.
         </p>
         <p>Size of blob is calcuated as min(width, height).</p>
-        <BaseBlob height={150} width={150} seed="Variant" />
+        <BaseBlob height={150} width={150} seed='Variant' />
         <pre>
           <code>{`<BaseBlob height={150} width={150} seed="Variant" />`}</code>
         </pre>
         <BaseBlob
           height={150}
           width={150}
-          seed="Variant"
-          imageProps={{ src: "/logo-192.png", alt: "Variant Logo" }}
+          seed='Variant'
+          imageProps={{ src: '/logo-192.png', alt: 'Variant Logo' }}
         />
         <pre>
           <code>
@@ -81,7 +82,7 @@ const Home = () => {
   />`}
           </code>
         </pre>
-        <AnimatedBlob height={150} width={150} seed="Variant" />
+        <AnimatedBlob height={150} width={150} seed='Variant' />
         <pre>
           <code>
             {`<AnimatedBlob height={150} width={150} seed="Variant" />`}
@@ -90,8 +91,8 @@ const Home = () => {
         <AnimatedBlob
           height={150}
           width={150}
-          seed="Variant"
-          imageProps={{ src: "/logo-192.png", alt: "Variant Logo" }}
+          seed='Variant'
+          imageProps={{ src: '/logo-192.png', alt: 'Variant Logo' }}
         />
         <pre>
           <code>
@@ -134,10 +135,10 @@ const usePercentageInView = <T extends HTMLElement>(): [
     }, 30);
 
     percentageSeen();
-    window.addEventListener("scroll", percentageSeen, {
+    window.addEventListener('scroll', percentageSeen, {
       passive: true,
     });
-    return () => window.addEventListener("scroll", percentageSeen);
+    return () => window.addEventListener('scroll', percentageSeen);
   }, [ref]);
 
   return [value, ref];
