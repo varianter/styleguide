@@ -6,6 +6,8 @@ import ColorSection from 'styleguide/color-grid';
 import css from 'styleguide/pages/app.module.css';
 import TypographyInfo from 'styleguide/typopgraphy-info';
 
+// TODO: Remove, testing purposes only!
+import DecorativeBoxes from '../../packages/components/src/decorative-boxes';
 const favicon = require('@variant/profile/lib/logo/favicon.png');
 
 const Home = () => {
@@ -18,6 +20,13 @@ const Home = () => {
         <link rel='icon' href={favicon} />
       </Head>
 
+      {/* TODO: Remove, testing purposes only! */}
+      <DecorativeBoxes
+        box1Position={{ top: 0, right: 0 }}
+        box2Position={{ bottom: 0, left: 0 }}
+      >
+        <img src='https://variantno.blob.core.windows.net/employees/-603cb17a.png' />
+      </DecorativeBoxes>
       <div className={css.hero} ref={ref}>
         <h1>Variant Styleguide</h1>
       </div>
