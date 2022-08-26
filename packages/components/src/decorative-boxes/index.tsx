@@ -7,6 +7,23 @@ interface BoxPosition {
   right?: number;
 }
 
+interface BoxProperties {
+  color: string;
+  position: `${'top' | 'topish' | 'middle' | 'bottomish' | 'bottom'}-${
+    | 'left'
+    | 'leftish'
+    | 'middle'
+    | 'rightish'
+    | 'right'}`;
+}
+
+type BoxSize = 'small' | 'medium' | 'large' | number;
+
+const test: BoxProperties = {
+  color: 'howdy',
+  position: 'bottom-right',
+};
+
 export interface DecorativeBoxesProps
   extends React.ComponentPropsWithoutRef<any> {
   children: JSX.Element;
@@ -91,6 +108,8 @@ function getInlineStyle(
     top: positionLeft + '%',
   };
 }
+// ---------------------------------------------
+// TODO: Everything under this line is kinda unneeded?
 
 function getPosition(
   boxSize: number,
