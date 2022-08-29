@@ -1,37 +1,47 @@
 import style from './style.module.css';
-
-interface BoxPosition {
-  top?: number;
-  left?: number;
-  bottom?: number;
-  right?: number;
-}
-
-interface BoxProperties {
+type BoxProperties = {
   color: string;
-  position: `${'top' | 'topish' | 'middle' | 'bottomish' | 'bottom'}-${
-    | 'left'
-    | 'leftish'
-    | 'middle'
-    | 'rightish'
-    | 'right'}`;
-}
+  position: `${VerticalBoxPosition}-${HorizontalBoxPosition}`;
+};
 
 type BoxSize = 'small' | 'medium' | 'large' | number;
-
-const test: BoxProperties = {
-  color: 'howdy',
-  position: 'bottom-right',
-};
+type VerticalBoxPosition = 'top' | 'topish' | 'middle' | 'bottomish' | 'bottom';
+// prettier-ignore
+type HorizontalBoxPosition = 'left' | 'leftish' | 'middle' | 'rightish' | 'right';
+// type BoxPosition = `${VerticalBoxPosition}-${HorizontalBoxPosition}`;
+type BoxPosition =
+  | 'top-left'
+  | 'top-leftish'
+  | 'top-middle'
+  | 'top-rightish'
+  | 'top-right'
+  | 'topish-left'
+  | 'topish-leftish'
+  | 'topish-middle'
+  | 'topish-rightish'
+  | 'topish-right'
+  | 'middle-left'
+  | 'middle-leftish'
+  | 'middle-middle'
+  | 'middle-rightish'
+  | 'middle-right'
+  | 'bottomish-left'
+  | 'bottomish-leftish'
+  | 'bottomish-middle'
+  | 'bottomish-rightish'
+  | 'bottomish-right'
+  | 'bottom-left'
+  | 'bottom-leftish'
+  | 'bottom-middle'
+  | 'bottom-rightish'
+  | 'bottom-right';
 
 export interface DecorativeBoxesProps
   extends React.ComponentPropsWithoutRef<any> {
   children: JSX.Element;
-  boxSize?: number;
-  box1Position?: BoxPosition;
-  box2Position?: BoxPosition;
-  box1Color?: string;
-  box2Color?: string;
+  boxSize: BoxSize;
+  box1Properties: BoxProperties;
+  box2Properties: BoxProperties;
 }
 
 /*
@@ -45,48 +55,49 @@ TODO: Investigate if it is easier/more consistent
 
 const DecorativeBoxes: React.FC<DecorativeBoxesProps> = ({
   children,
-  boxSize = 60,
-  box1Position,
-  box2Position,
-  box1Color = 'var(--color-secondary2__tint4)',
-  box2Color = 'var(--color-secondary1__tint4)',
+  boxSize,
+  box1Properties,
+  box2Properties,
 }) => {
-  const randomPositions = createRandomPosition(boxSize);
-  const box1ComputedPositions = getPosition(
-    boxSize,
-    randomPositions[0],
-    box1Position
-  );
-  const box2ComputedPositions = getPosition(
-    boxSize,
-    randomPositions[1],
-    box2Position
-  );
-
-  console.log('Box1 position:');
-  console.log(box1ComputedPositions);
-  console.log('Box2 position:');
-  console.log(box2ComputedPositions);
-
   return (
     <div className={style['main-container']}>
       <div
         className={style['decorative-box']}
-        style={getInlineStyle(
-          boxSize,
-          box1Color,
-          box1ComputedPositions.left,
-          box1ComputedPositions.top
-        )}
+        style={{
+          width: getNumericalBoxSize(boxSize) + '%',
+          backgroundColor: box1Properties.color,
+          left:
+            calculateDistanceToSide(
+              getNumericalBoxSize(boxSize),
+              box1Properties.position,
+              'left'
+            ) + '%',
+          top:
+            calculateDistanceToSide(
+              getNumericalBoxSize(boxSize),
+              box1Properties.position,
+              'top'
+            ) + '%',
+        }}
       />
       <div
         className={style['decorative-box']}
-        style={getInlineStyle(
-          boxSize,
-          box2Color,
-          box2ComputedPositions.left,
-          box2ComputedPositions.top
-        )}
+        style={{
+          width: getNumericalBoxSize(boxSize) + '%',
+          backgroundColor: box2Properties.color,
+          left:
+            calculateDistanceToSide(
+              getNumericalBoxSize(boxSize),
+              box2Properties.position,
+              'left'
+            ) + '%',
+          top:
+            calculateDistanceToSide(
+              getNumericalBoxSize(boxSize),
+              box2Properties.position,
+              'top'
+            ) + '%',
+        }}
       />
       <div className={style['child-container']}>{children}</div>
     </div>
@@ -94,6 +105,60 @@ const DecorativeBoxes: React.FC<DecorativeBoxesProps> = ({
 };
 
 export default DecorativeBoxes;
+
+function calculateDistanceToSide(
+  boxSize: number,
+  positionString: string,
+  distanceToCalculate: 'top' | 'left'
+) {
+  const positionAsString =
+    distanceToCalculate === 'top'
+      ? positionString.split('-')[0]
+      : positionString.split('-')[1];
+  switch (positionAsString) {
+    case 'left':
+    case 'top':
+      return 0;
+    case 'leftish':
+    case 'topish':
+      return 25 - boxSize / 4;
+    case 'middle':
+      return 50 - boxSize / 2;
+    case 'rightish':
+    case 'bottomish':
+      return 75 - boxSize * 0.75;
+    case 'right':
+    case 'bottom':
+      return 100 - boxSize;
+  }
+  // Fallback
+  return 0;
+}
+
+function getNumericalBoxSize(boxSize: BoxSize): number {
+  switch (boxSize) {
+    case 'small':
+      return 40;
+    case 'medium':
+      return 50;
+    case 'large':
+      return 60;
+    default:
+      return boxSize;
+  }
+}
+
+{
+  /*
+// ---------------------------------------------
+// TODO: Everything under this line is kinda unneeded?
+
+interface BoxPosition {
+  top?: number;
+  left?: number;
+  bottom?: number;
+  right?: number;
+}
 
 function getInlineStyle(
   boxSize: number,
@@ -108,8 +173,6 @@ function getInlineStyle(
     top: positionLeft + '%',
   };
 }
-// ---------------------------------------------
-// TODO: Everything under this line is kinda unneeded?
 
 function getPosition(
   boxSize: number,
@@ -123,8 +186,8 @@ function getPosition(
   }
 }
 
-/* Converts position values from uncertain top/right/bottom/left-format 
-to a guaranteed top/left-format */
+// Converts position values from uncertain top/right/bottom/left-format 
+// to a guaranteed top/left-format 
 function convertPosition(boxSize: number, rawPosition?: BoxPosition) {
   if (positionInfoIsSufficient(rawPosition)) {
     // if-statement should guarantee rawPosition exists and has sufficient info
@@ -164,12 +227,12 @@ function createRandomPosition(boxSize: number) {
 function createPositionFromSection(section: number, boxSize: number) {
   let rawPosition: BoxPosition = {};
   const distanceFromCorner = randInt(50 - boxSize / 2);
-  /*  Sections:
-    0 1
-   7⌜ ⌝2
-   6⌞ ⌟3
-    5 4
-  */
+  //  Sections:
+  //  0 1
+  // 7⌜ ⌝2
+  // 6⌞ ⌟3
+  //  5 4
+  //
   switch (section % 8) {
     case 0:
       rawPosition.top = 0;
@@ -218,4 +281,7 @@ function positionInfoIsSufficient(rawPosition?: BoxPosition) {
 
 function randInt(max: number) {
   return Math.floor(Math.random() * max);
+}
+
+*/
 }

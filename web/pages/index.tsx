@@ -22,8 +22,9 @@ const Home = () => {
 
       {/* TODO: Remove, testing purposes only! */}
       <DecorativeBoxes
-        box1Position={{ top: 0, right: 0 }}
-        box2Position={{ bottom: 0, left: 0 }}
+        boxSize={20}
+        box1Properties={{ color: 'red', position: 'bottomish-left' }}
+        box2Properties={{ color: 'blue', position: 'bottom-rightish' }}
       >
         <img src='https://variantno.blob.core.windows.net/employees/-603cb17a.png' />
       </DecorativeBoxes>
