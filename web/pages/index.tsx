@@ -1,4 +1,5 @@
 import { AnimatedBlob, BaseBlob } from '@variant/components/lib/blob';
+import { DecorativeBoxes } from '@variant/components/lib/decorative-boxes';
 import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
 import BlobGenerator from 'styleguide/blobs';
@@ -7,7 +8,6 @@ import css from 'styleguide/pages/app.module.css';
 import TypographyInfo from 'styleguide/typopgraphy-info';
 
 // TODO: Remove, testing purposes only!
-import DecorativeBoxes from '../../packages/components/src/decorative-boxes';
 const favicon = require('@variant/profile/lib/logo/favicon.png');
 
 const Home = () => {
@@ -22,11 +22,19 @@ const Home = () => {
 
       {/* TODO: Remove, testing purposes only! */}
       <DecorativeBoxes
-        boxSize={20}
-        box1Properties={{ color: 'red', position: 'bottomish-left' }}
-        box2Properties={{ color: 'blue', position: 'bottom-rightish' }}
+        box1Properties={{
+          color: '--color-secondary2__tint4',
+          position: { verticalPosition: 100, horizontalPosition: 66 },
+        }}
+        box2Properties={{
+          color: '--color-primary__tint3',
+          position: 'bottom-right',
+        }}
       >
-        <img src='https://variantno.blob.core.windows.net/employees/-603cb17a.png' />
+        <img
+          src='https://variantno.blob.core.windows.net/employees/-603cb17a.png'
+          alt='accessLint kan ta seg en bolle'
+        />
       </DecorativeBoxes>
       <div className={css.hero} ref={ref}>
         <h1>Variant Styleguide</h1>
