@@ -1,40 +1,12 @@
 import style from './style.module.css';
 type BoxProperties = {
   color: string;
-  position: `${VerticalBoxPosition}-${HorizontalBoxPosition}`;
+  position: `${VerticalPosition}-${HorizontalPosition}`;
 };
 
 type BoxSize = 'small' | 'medium' | 'large' | number;
-type VerticalBoxPosition = 'top' | 'topish' | 'middle' | 'bottomish' | 'bottom';
-// prettier-ignore
-type HorizontalBoxPosition = 'left' | 'leftish' | 'middle' | 'rightish' | 'right';
-// type BoxPosition = `${VerticalBoxPosition}-${HorizontalBoxPosition}`;
-type BoxPosition =
-  | 'top-left'
-  | 'top-leftish'
-  | 'top-middle'
-  | 'top-rightish'
-  | 'top-right'
-  | 'topish-left'
-  | 'topish-leftish'
-  | 'topish-middle'
-  | 'topish-rightish'
-  | 'topish-right'
-  | 'middle-left'
-  | 'middle-leftish'
-  | 'middle-middle'
-  | 'middle-rightish'
-  | 'middle-right'
-  | 'bottomish-left'
-  | 'bottomish-leftish'
-  | 'bottomish-middle'
-  | 'bottomish-rightish'
-  | 'bottomish-right'
-  | 'bottom-left'
-  | 'bottom-leftish'
-  | 'bottom-middle'
-  | 'bottom-rightish'
-  | 'bottom-right';
+type VerticalPosition = 'top' | 'topish' | 'middle' | 'bottomish' | 'bottom';
+type HorizontalPosition = 'left' | 'leftish' | 'middle' | 'rightish' | 'right';
 
 export interface DecorativeBoxesProps
   extends React.ComponentPropsWithoutRef<any> {
