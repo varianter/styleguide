@@ -108,6 +108,7 @@ function calculateDistanceToSide(
         return 100 - boxSize;
     }
   } else if (
+    // object with exact numerical position has been used
     'verticalPosition' in position &&
     'horizontalPosition' in position
   ) {
@@ -121,6 +122,7 @@ function calculateDistanceToSide(
   return 0;
 }
 
+// defines box sizes. 'medium' is the standard size.
 function getNumericalBoxSize(boxSize: BoxSize): number {
   switch (boxSize) {
     case 'small':
