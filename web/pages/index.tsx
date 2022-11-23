@@ -16,10 +16,6 @@ const Home = () => {
       <Head>
         <title>Styleguide – Variant</title>
         <link rel="icon" href={favicon} />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-        />
       </Head>
 
       <div className={css.hero} ref={ref}>
@@ -43,26 +39,22 @@ const Home = () => {
         <div className={css.buttonGroup}>
           <div>
             <a href="/variant-bw.svg" download>
-              <button>
-                SVG<span className="material-symbols-outlined">download</span>
-              </button>
+              SVG
+              <img src="/save-file.svg" alt="" role="none" />
             </a>
             <a href="/variant-bw.png" download>
-              <button>
-                PNG<span className="material-symbols-outlined">download</span>
-              </button>
+              PNG
+              <img src="/save-file.svg" alt="" role="none" />
             </a>
           </div>
           <div>
             <a href="/variant-colors.svg" download>
-              <button>
-                SVG<span className="material-symbols-outlined">download</span>
-              </button>
+              SVG
+              <img src="/save-file.svg" alt="" role="none" />
             </a>
             <a href="/variant-colors.png" download>
-              <button>
-                PNG<span className="material-symbols-outlined">download</span>
-              </button>
+              PNG
+              <img src="/save-file.svg" alt="" role="none" />
             </a>
           </div>
         </div>

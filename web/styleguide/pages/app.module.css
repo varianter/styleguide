@@ -36,18 +36,29 @@
   text-decoration: none;
 }
 
-.buttonGroup button {
+.buttonGroup button,
+.buttonGroup a {
   display: flex;
   align-items: center;
   border: none;
   border-radius: 0.3rem;
   padding: 0.4rem;
   background-color: var(--color-secondary2__tint2);
+  color: var(--color-secondary2__tint2--text);
+  flex-wrap: nowrap;
+  gap: 0.4rem;
 }
 
-.buttonGroup button:hover {
+.buttonGroup button:hover,
+.buttonGroup a:hover {
   background-color: var(--color-secondary2__tint3);
   cursor: pointer;
+}
+
+.buttonGroup button img,
+.buttonGroup a img {
+  display: block;
+  height: 1rem;
 }
 
 @media (max-width: 1000px) {
