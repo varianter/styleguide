@@ -19,9 +19,44 @@
   opacity: var(--bg-opacity);
   transition: opacity 100ms ease-in;
 }
+
+.buttonGroup {
+  padding-top: 2rem;
+  display: flex;
+}
+
+.buttonGroup div {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.buttonGroup a {
+  text-decoration: none;
+}
+
+.buttonGroup button {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.4rem;
+  background-color: var(--color-secondary2__tint2);
+}
+
+.buttonGroup button:hover {
+  background-color: var(--color-secondary2__tint3);
+  cursor: pointer;
+}
+
 @media (max-width: 1000px) {
   .container {
     margin-left: 0;
+  }
+
+  .buttonGroup {
+    display: none;
   }
 }
 
