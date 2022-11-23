@@ -16,6 +16,10 @@ const Home = () => {
       <Head>
         <title>Styleguide – Variant</title>
         <link rel="icon" href={favicon} />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+        />
       </Head>
 
       <div className={css.hero} ref={ref}>
@@ -32,8 +36,36 @@ const Home = () => {
 
         <p>
           For the color version you are encouraged to make your own twist with
-          clipped illustration. Make sure to check the contrast where you use it.
+          clipped illustration. Make sure to check the contrast where you use
+          it.
         </p>
+
+        <div className={css.buttonGroup}>
+          <div>
+            <a href="/variant-bw.svg" download>
+              <button>
+                SVG<span className="material-symbols-outlined">download</span>
+              </button>
+            </a>
+            <a href="/variant-bw.png" download>
+              <button>
+                PNG<span className="material-symbols-outlined">download</span>
+              </button>
+            </a>
+          </div>
+          <div>
+            <a href="/variant-colors.svg" download>
+              <button>
+                SVG<span className="material-symbols-outlined">download</span>
+              </button>
+            </a>
+            <a href="/variant-colors.png" download>
+              <button>
+                PNG<span className="material-symbols-outlined">download</span>
+              </button>
+            </a>
+          </div>
+        </div>
       </div>
 
       <div className={css.section}>
