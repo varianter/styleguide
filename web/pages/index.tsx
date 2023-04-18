@@ -23,6 +23,17 @@ const Home = () => {
       </div>
 
       <div className={css.section}>
+        <h2 id="deprecated">Deprecation notice</h2>
+
+        <p>
+          A newer version of the styleguide can be viewed at{" "}
+          <a href="https://stil.variant.no">stil.variant.no</a>. In true MVP
+          style this is just a prototype in Figma as we work on implementing it
+          at some point™.
+        </p>
+      </div>
+
+      <div className={css.section}>
         <h2>Logo</h2>
 
         <div className={css.logoSection}>
